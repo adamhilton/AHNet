@@ -8,9 +8,9 @@ install:
 
 before_build:
  - ps: "&{$Branch='dev';iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.ps1'))}"
- - cmd: dnvm install 1.0.0-rc1-update2 -r coreclr
+ - cmd: dnvm install 1.0.0-rc1-final -r coreclr
  - cmd: dnvm list
- - cmd: dnvm use 1.0.0-rc1-update2 -r coreclr
+ - cmd: dnvm use 1.0.0-rc1-final -r coreclr
  - cmd: dnu restore 
  
 test_script:
