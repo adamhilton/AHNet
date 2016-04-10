@@ -14,7 +14,7 @@ so feel free to use my code however you want! My only request is that you don't 
 
 2. Install [PostgreSql](http://www.postgresql.org/download/) and add user with permisions to create databases
 
-3. Add connection string of the postgres database as an environment variable called AHNet:Data:DefaultConnection:ConnectionString on your system
+3. Add connection string of the postgres database as an environment variable called AHNetConnectionString on your system
 
 4. Finally, run 'dnx ef database update' inside the Camp.Domain root
 
