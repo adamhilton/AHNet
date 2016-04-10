@@ -14,32 +14,11 @@ so feel free to use my code however you want! My only request is that you don't 
 
 2. Install [PostgreSql](http://www.postgresql.org/download/) and add user with permisions to create databases
 
-3.  Add an appsettings.json file to the root of both AHNet.Web and AHNet.Domain.
+3. Add connection string of the postgres database as an environment variable called AHNet:Data:DefaultConnection:ConnectionString on your system
 
-###### AHNet.Web/appsettings.json:
-``` json
-{
-  "Logging": {
-    "IncludeScopes": false,
-    "LogLevel": {
-      "Default": "Verbose",
-      "System": "Information",
-      "Microsoft": "Information"
-    }
-  }
-}
-```
+4. Finally, run 'dnx ef database update' inside the Camp.Domain root
 
-###### AHNet.Domain/appsettings.json:
-``` json
-{
-  "Data": {
-    "DefaultConnection": {
-      "ConnectionString": "User ID={userid};Password={password};Host=localhost;Port=5432;Database={database};Pooling=true;"
-    }
-  }
-}
-```
+
 
 
 
