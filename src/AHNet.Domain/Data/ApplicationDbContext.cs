@@ -16,7 +16,7 @@ namespace AHNet.Domain.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = _configuration["Data:DefaultConnection:ConnectionString"];
+            var connectionString = _configuration["AHNet:Data:DefaultConnection:ConnectionString"];
             optionsBuilder.UseNpgsql(connectionString);
         }
     }
