@@ -14,11 +14,6 @@ namespace AHNet.Domain.Data
             _configuration = configuration;
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = _configuration["Data:DefaultConnection:ConnectionString"];

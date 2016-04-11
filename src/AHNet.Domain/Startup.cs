@@ -16,8 +16,7 @@ namespace AHNet.Domain
         {
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                .AddEnvironmentVariables();
 
             _config = builder.Build();
         }
