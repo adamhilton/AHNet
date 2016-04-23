@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -30,7 +31,24 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a>Foo</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (User.IsSignedIn())
+                        {
+                            <li>
+                                <form method="post" asp-controller="Account" asp-action="Logout" class="navbar-form">
+                                    @User.GetUserName()
+                                    <input type="submit" value="Logout" class="btn btn-danger" />
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

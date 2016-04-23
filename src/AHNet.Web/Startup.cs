@@ -4,14 +4,17 @@ using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using AHNet.Domain.Data;
-using AHNet.Domain.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
+using AHNet.Entities;
+using AHNet.Data;
 
 namespace AHNet.Web
 {
     public class Startup
     {
+
+        public IConfigurationRoot Configuration { get; set; }
+
         public Startup(IHostingEnvironment env)
         {
             // Set up configuration sources.
@@ -23,15 +26,20 @@ namespace AHNet.Web
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; set; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                    .AddEntityFrameworkStores<ApplicationDbContext>();
-
             services.AddMvc();
+
+            services.AddEntityFramework()
+                    .AddNpgsql()
+                    .AddDbContext<AHNetDbContext>();
+
+            services.AddIdentity<User, IdentityRole>()
+                    .AddEntityFrameworkStores<AHNetDbContext>();
+
+            services.AddSingleton(_ => Configuration);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +64,7 @@ namespace AHNet.Web
                     using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
                         .CreateScope())
                     {
-                        serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
+                        serviceScope.ServiceProvider.GetService<AHNetDbContext>()
                              .Database.Migrate();
                     }
                 }

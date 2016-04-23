@@ -27,19 +27,11 @@ namespace AHNet.Domain
         {
             // Add framework services
             services.AddInstance(_config);
-
-            services.AddEntityFramework()
-                .AddNpgsql()
-                .AddDbContext<ApplicationDbContext>();
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseIdentity();
+            // Add middleware here...
         }
     }
 }
