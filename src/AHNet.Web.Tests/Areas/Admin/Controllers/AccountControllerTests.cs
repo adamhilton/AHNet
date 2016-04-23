@@ -1,67 +1,99 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-using AHNet.Entities;
+﻿using AHNet.Entities;
 using AHNet.Web.Areas.Admin.Controllers;
 using AHNet.Web.Areas.Admin.ViewModels;
-using AHNet.Web.Tests.Data;
+using AHNet.Web.Tests.Mocks;
 using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Http.Features;
-using Microsoft.AspNet.Http.Features.Authentication;
-using Microsoft.AspNet.Http.Features.Authentication.Internal;
-using Microsoft.AspNet.Http.Internal;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.Logging;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.OptionsModel;
+using Moq;
 using Xunit;
 
 namespace AHNet.Web.Tests.Areas.Admin.Controllers
 {
     public class AccountControllerTests
     {
-        public AccountController Sut => new AccountController(_userManager, _signInManager);
-
-        private UserManager<User> _userManager;
-        private SignInManager<User> _signInManager;
-
+        public AccountController Sut => new AccountController(
+                                                _userManager,
+                                                _signInManager);
+        
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        
         public AccountControllerTests()
         {
-            var services = new ServiceCollection();
-            services.AddEntityFramework()
-                    .AddInMemoryDatabase()
-                    .AddDbContext<MockAHNetDbContext>();
+            var context = new Mock<HttpContext>();
+            var contextAccessor = new Mock<IHttpContextAccessor>();
+            contextAccessor.Setup(x => x.HttpContext).Returns(context.Object);
 
-            services.AddIdentity<User, IdentityRole>()
-                    .AddEntityFrameworkStores<MockAHNetDbContext>();
+            var services = new MockServices();
 
-            var context = new DefaultHttpContext();
-            context.Features.Set<IHttpAuthenticationFeature>(new HttpAuthenticationFeature());
-            services.AddSingleton<IHttpContextAccessor>(h => new HttpContextAccessor { HttpContext = context });
+            _userManager = services.UserManager;
+            _signInManager = new MockSignInManager(contextAccessor.Object, _userManager);
+        }
 
-            var serviceProvider = services.BuildServiceProvider();
-            _userManager = serviceProvider.GetRequiredService<UserManager<User>>();
-            _signInManager = serviceProvider.GetRequiredService<SignInManager<User>>();
+        [Fact]
+        public async void UsermanagerCanCreateUser()
+        {
+            var user = CreateMockUser();
+
+            await _userManager.CreateAsync(user, "Bar123!");
+            var createdUser = _userManager.FindByNameAsync(user.UserName).Result;
+
+            Assert.NotNull(createdUser);
         }
 
         [Fact]
         public async void UsermanagerDoesNotCreateAUserWithABadPassword()
         {
-            var user = new User()
-            {
-                UserName = "Foo"
-            };
-            
+            var user = CreateMockUser();
+
             await _userManager.CreateAsync(user, "Bar");
             var createdUser = _userManager.FindByNameAsync(user.UserName).Result;
 
             Assert.Null(createdUser);
+        }
+
+        [Fact]
+        public void LogInPageReturnsAnActionResult()
+        {
+            var result = Sut.Login();
+
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public async void UserCanLogInToAdminPortal()
+        {
+            var user = CreateMockUser();
+
+            const string password = "Foo123!";
+
+            await _userManager.CreateAsync(user, password);
+            
+            var result = await Sut.Login(new LoginViewModel()
+            {
+                Password = password,
+                RememberMe = false,
+                ReturnUrl = "",
+                Username = user.UserName
+            });
+            
+            Assert.Equal(0, Sut.ModelState.ErrorCount);
+        }
+
+        [Fact]
+        public async void UserCanLogOutOfAdminPortal()
+        {
+            var result = await Sut.Logout();
+          
+            Assert.NotNull(result);
+        }
+
+        private static User CreateMockUser()
+        {
+            return new User()
+            {
+                UserName = "Foo"
+            };
         }
     }
 }

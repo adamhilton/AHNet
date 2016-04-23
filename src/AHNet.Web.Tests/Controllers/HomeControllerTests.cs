@@ -6,11 +6,12 @@ namespace AHNet.Web.Tests.Controllers
 {
     public class HomeControllerTests
     {
+        public HomeController Sut => new HomeController();
+
         [Fact]
         public void IndexReturnViewResult()
         {
-            var controller = new HomeController();
-            var result = controller.Index();
+            var result = Sut.Index();
             Assert.IsType(typeof(ViewResult), result);
         }
     }

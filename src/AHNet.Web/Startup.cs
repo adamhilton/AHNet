@@ -7,6 +7,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Identity.EntityFramework;
 using AHNet.Entities;
 using AHNet.Data;
+using AHNet.Web.Data;
+using Microsoft.AspNet.Authentication.Cookies;
+using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Identity;
 
 namespace AHNet.Web
 {
@@ -37,13 +41,18 @@ namespace AHNet.Web
 
             services.AddIdentity<User, IdentityRole>()
                     .AddEntityFrameworkStores<AHNetDbContext>();
-
+            
             services.AddSingleton(_ => Configuration);
+
+            services.AddTransient<SeedData>();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+         public async void Configure(IApplicationBuilder app, 
+                              IHostingEnvironment env, 
+                              ILoggerFactory loggerFactory,
+                              SeedData seedData)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -65,18 +74,26 @@ namespace AHNet.Web
                         .CreateScope())
                     {
                         serviceScope.ServiceProvider.GetService<AHNetDbContext>()
-                             .Database.Migrate();
+                            .Database.Migrate();
                     }
                 }
                 catch { }
             }
-
+            
             app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
 
             app.UseStaticFiles();
 
             app.UseIdentity();
 
+            app.UseCookieAuthentication(options =>
+            {
+                options.AuthenticationScheme = "Cookie";
+                options.LoginPath = new PathString("/Admin/Account/Login");
+                options.AutomaticAuthenticate = true;
+                options.AutomaticChallenge = true;
+            });
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -87,6 +104,9 @@ namespace AHNet.Web
                     name: "adminRoute",
                     template: "{area:exists}/{controller=Dashboard}/{action=Index}");
             });
+
+
+            await seedData.InitializeAsync();
 
         }
 

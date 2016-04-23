@@ -3,6 +3,7 @@ using AHNet.Web.Areas.Admin.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Authorization;
 
 namespace AHNet.Web.Areas.Admin.Controllers
 {
@@ -50,10 +51,11 @@ namespace AHNet.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account", new { Area = "Admin" });
         }
 
     }
