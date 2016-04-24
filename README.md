@@ -16,7 +16,10 @@ so feel free to use my code however you want! My only request is that you don't 
 
 3. Add connection string of the postgres database as an environment variable called AHNetConnectionString on your system
 
-4. Finally, run 'dnx ef database update' inside the Camp.Domain root
+4. Run 'dnx ef database update' inside the Camp.Web root
+
+5. Before running the project, it's a good idea to add two environment variables, AHNetSeedUserName and AHNetSeedPassword. 
+   This will be used to create a seed user if no user has been created yet. 
 
 ### Import information for unit test project!
 The unit test project is using a version of [Moq](https://github.com/moq/moq4) that is only available via MyGet. 
