@@ -1,15 +1,15 @@
-﻿using AHNet.Domain.Entities;
+﻿using AHNet.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 
-namespace AHNet.Domain.Data
+namespace AHNet.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class AHNetDbContext : IdentityDbContext<User>
     {
         private IConfiguration _configuration;
 
-        public ApplicationDbContext(IConfigurationRoot configuration)
+        public AHNetDbContext(IConfigurationRoot configuration)
         {
             _configuration = configuration;
         }

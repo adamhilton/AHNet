@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace AHNet.Domain.Entities
+namespace AHNet.Entities
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
-    public class ApplicationUser : IdentityUser
+    public class User : IdentityUser
     {
     }
 }

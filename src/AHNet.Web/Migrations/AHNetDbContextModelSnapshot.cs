@@ -3,20 +3,19 @@ using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Data.Entity.Migrations;
-using AHNet.Domain.Data;
+using AHNet.Data;
 
-namespace AHNet.Domain.Migrations
+namespace AHNet.Web.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20160409185811_initial")]
-    partial class initial
+    [DbContext(typeof(AHNetDbContext))]
+    partial class AHNetDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348");
 
-            modelBuilder.Entity("AHNet.Domain.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("AHNet.Entities.User", b =>
                 {
                     b.Property<string>("Id");
 
@@ -155,14 +154,14 @@ namespace AHNet.Domain.Migrations
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("AHNet.Domain.Entities.ApplicationUser")
+                    b.HasOne("AHNet.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("AHNet.Domain.Entities.ApplicationUser")
+                    b.HasOne("AHNet.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
@@ -173,7 +172,7 @@ namespace AHNet.Domain.Migrations
                         .WithMany()
                         .HasForeignKey("RoleId");
 
-                    b.HasOne("AHNet.Domain.Entities.ApplicationUser")
+                    b.HasOne("AHNet.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });

@@ -4,14 +4,21 @@ using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using AHNet.Domain.Data;
-using AHNet.Domain.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
+using AHNet.Entities;
+using AHNet.Data;
+using AHNet.Web.Data;
+using Microsoft.AspNet.Authentication.Cookies;
+using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Identity;
 
 namespace AHNet.Web
 {
     public class Startup
     {
+
+        public IConfigurationRoot Configuration { get; set; }
+
         public Startup(IHostingEnvironment env)
         {
             // Set up configuration sources.
@@ -23,19 +30,29 @@ namespace AHNet.Web
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; set; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                    .AddEntityFrameworkStores<ApplicationDbContext>();
-
             services.AddMvc();
+
+            services.AddEntityFramework()
+                    .AddNpgsql()
+                    .AddDbContext<AHNetDbContext>();
+
+            services.AddIdentity<User, IdentityRole>()
+                    .AddEntityFrameworkStores<AHNetDbContext>();
+            
+            services.AddSingleton(_ => Configuration);
+
+            services.AddTransient<SeedData>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+         public async void Configure(IApplicationBuilder app, 
+                              IHostingEnvironment env, 
+                              ILoggerFactory loggerFactory,
+                              SeedData seedData)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -56,25 +73,41 @@ namespace AHNet.Web
                     using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
                         .CreateScope())
                     {
-                        serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
-                             .Database.Migrate();
+                        serviceScope.ServiceProvider.GetService<AHNetDbContext>()
+                            .Database.Migrate();
                     }
                 }
                 catch { }
             }
-
+            
             app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
 
             app.UseStaticFiles();
 
             app.UseIdentity();
 
+            app.UseCookieAuthentication(options =>
+            {
+                options.AuthenticationScheme = "Cookie";
+                options.LoginPath = new PathString("/Admin/Account/Login");
+                options.AutomaticAuthenticate = true;
+                options.AutomaticChallenge = true;
+            });
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "adminRoute",
+                    template: "{area:exists}/{controller=Dashboard}/{action=Index}");
             });
+
+
+            await seedData.InitializeAsync();
+
         }
 
         // Entry point for the application.
