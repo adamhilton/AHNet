@@ -18,6 +18,14 @@ so feel free to use my code however you want! My only request is that you don't 
 
 4. Finally, run 'dnx ef database update' inside the Camp.Domain root
 
+### Import information for unit test project!
+The unit test project is using a version of [Moq](https://github.com/moq/moq4) that is only available via MyGet. 
+It's a version that Microsoft has ported over for their own personal use, which is compatible with ASP.NET Core.
+
+Use this command to add the nuget source before restoring the test project's dependencies:
+``` Shell
+nuget sources add -Name aspnet-contrib -Source https://www.myget.org/F/aspnet-contrib/api/v3/index.json
+```
 
 
 
