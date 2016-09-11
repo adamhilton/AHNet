@@ -1,9 +1,7 @@
 using System;
-using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Infrastructure;
-using Microsoft.Data.Entity.Metadata;
-using Microsoft.Data.Entity.Migrations;
-using AHNet.Data;
+using AHNet.Web.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace AHNet.Web.Migrations
 {
