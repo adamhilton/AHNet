@@ -1,19 +1,13 @@
-version: 1.0.0.{build}.{branch}
+version: '1.0.0.{build}.{branch}'
 
 init:
-  - git config --global core.autocrlf true
+ - ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
+
+before_build: 
+ - appveyor-retry dotnet restore -v Minimal
   
 install:
  - cmd: nuget sources add -Name api.nuget.org -Source https://api.nuget.org/v3/index.json
- - cmd: nuget sources add -Name aspnet-contrib -Source https://www.myget.org/F/aspnet-contrib/api/v3/index.json
 
-before_build:
- - ps: "&{$Branch='dev';iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.ps1'))}"
- - cmd: dnvm install 1.0.0-rc1-final -r coreclr
- - cmd: dnvm list
- - cmd: dnvm use 1.0.0-rc1-final -r coreclr
- - cmd: dnu restore 
- 
 test_script:
- - ps: cd .\src\AHNet.Web.Tests
- - cmd: dnx test 
+ - dotnet test "test\MyFirstUnitTests" -c %CONFIGURATION%

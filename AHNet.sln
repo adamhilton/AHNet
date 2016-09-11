@@ -24,16 +24,11 @@ Global
 		{3D3C59DA-C470-409E-9229-B69946C9D36C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D3C59DA-C470-409E-9229-B69946C9D36C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D3C59DA-C470-409E-9229-B69946C9D36C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{604FC54E-561E-4FE6-954B-92575BE54BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{604FC54E-561E-4FE6-954B-92575BE54BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{604FC54E-561E-4FE6-954B-92575BE54BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{604FC54E-561E-4FE6-954B-92575BE54BAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3D3C59DA-C470-409E-9229-B69946C9D36C} = {C3399FC9-9AC4-4E69-811A-2EA0939FE5C2}
-		{604FC54E-561E-4FE6-954B-92575BE54BAD} = {C3399FC9-9AC4-4E69-811A-2EA0939FE5C2}
 	EndGlobalSection
 EndGlobal
