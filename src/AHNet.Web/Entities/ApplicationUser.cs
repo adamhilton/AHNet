@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace AHNet.Entities
+namespace AHNet.Web.Entities
 {
-    // Add profile data for application users by adding properties to the ApplicationUser class
     public class User : IdentityUser
     {
     }

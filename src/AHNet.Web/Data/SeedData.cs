@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AHNet.Web.Entities;
+using AHNet.Web.Extensions;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
-using AHNet.Data;
-using AHNet.Entities;
-using Microsoft.AspNet.Identity;
-using Microsoft.Extensions.Configuration;
 
 namespace AHNet.Web.Data
 {
@@ -15,7 +13,9 @@ namespace AHNet.Web.Data
         private readonly UserManager<User> _userManager;
         private readonly IConfigurationRoot _configuration;
 
-        public SeedData(AHNetDbContext ctx, UserManager<User> userManager, IConfigurationRoot configuration)
+        public SeedData(AHNetDbContext ctx, 
+            UserManager<User> userManager,
+            IConfigurationRoot configuration)
         {
             _ctx = ctx;
             _userManager = userManager;
@@ -24,14 +24,31 @@ namespace AHNet.Web.Data
 
         public async Task InitializeAsync()
         {
-            if (!_ctx.Users.Any())
+            if (NoUsersExist())
             {
-                await _userManager.CreateAsync(new User()
-                {
-                    UserName = _configuration["AHNetSeedUserName"]
-                }, _configuration["AHNetSeedPassword"]);
-                _ctx.SaveChanges();
+                await CreateAdminAsync();
             }
+        }
+
+        private bool NoUsersExist()
+        {
+            return !_ctx.Users.Any();
+        }
+
+        private async Task CreateAdminAsync()
+        {
+            var userName = _configuration.GetSeedData("AHNetSeedAdminUserName");
+            var password = _configuration.GetSeedData("AHNetSeedAdminPassword");
+            await CreateUserAsync(userName, password);
+        }
+        
+        private async Task CreateUserAsync(string userName, string password)
+        {
+            await _userManager.CreateAsync(new User()
+            {
+                UserName = userName
+            }, password);
+            _ctx.SaveChanges();
         }
     }
 }

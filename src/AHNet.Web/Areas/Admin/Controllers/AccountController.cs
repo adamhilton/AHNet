@@ -1,9 +1,9 @@
-﻿using AHNet.Entities;
-using AHNet.Web.Areas.Admin.ViewModels;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Mvc;
+﻿using AHNet.Web.Areas.Admin.ViewModels;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using AHNet.Web.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AHNet.Web.Areas.Admin.Controllers
 {
