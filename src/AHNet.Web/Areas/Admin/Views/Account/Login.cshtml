@@ -5,7 +5,7 @@
 
 <h2>Login</h2>
 
-<form method="post" asp-controller="Account" asp-action="Login" asp-route-returnurl="@Model.ReturnUrl">
+<form method="post" asp-controller="Account" asp-action="Login" asp-route-area="Admin" asp-route-returnurl="@Model.ReturnUrl">
     <div asp-validation-summary="ModelOnly"></div>
     <div>
         <label asp-for="Username"></label>

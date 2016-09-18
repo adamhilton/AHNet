@@ -235,7 +235,9 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
-#VSCODE
+# VSCODE
 .vscode/
 
+# intellij
+.idea/
 

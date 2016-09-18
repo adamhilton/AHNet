@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
+using Serilog;
 
 namespace AHNet.Web.Data
 {
@@ -32,13 +34,14 @@ namespace AHNet.Web.Data
 
         private bool NoUsersExist()
         {
-            return !_ctx.Users.Any();
+            return _ctx.Users == null;
         }
 
         private async Task CreateAdminAsync()
         {
-            var userName = _configuration.GetSeedData("AHNetSeedAdminUserName");
-            var password = _configuration.GetSeedData("AHNetSeedAdminPassword");
+            var userName = _configuration?.GetSeedData("AHNetSeedAdminUserName");
+            var password = _configuration?.GetSeedData("AHNetSeedAdminPassword");
+         
             await CreateUserAsync(userName, password);
         }
         

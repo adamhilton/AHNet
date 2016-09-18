@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using AHNet.Web.Data;
 
-namespace ahnet.web.Migrations
+namespace AHNet.Web.Migrations
 {
     [DbContext(typeof(AHNetDbContext))]
     partial class AHNetDbContextModelSnapshot : ModelSnapshot
@@ -28,8 +28,6 @@ namespace ahnet.web.Migrations
                         .HasAnnotation("MaxLength", 256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("Foo");
 
                     b.Property<bool>("LockoutEnabled");
 
