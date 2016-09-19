@@ -1,11 +1,9 @@
-﻿using AHNet.Web.Entities;
+﻿using System.Linq;
+using AHNet.Web.Entities;
 using AHNet.Web.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
-using System.Linq;
 using System.Threading.Tasks;
-using System;
-using Serilog;
 
 namespace AHNet.Web.Data
 {
@@ -34,7 +32,7 @@ namespace AHNet.Web.Data
 
         private bool NoUsersExist()
         {
-            return _ctx.Users == null;
+            return !_ctx.Users.Any();
         }
 
         private async Task CreateAdminAsync()

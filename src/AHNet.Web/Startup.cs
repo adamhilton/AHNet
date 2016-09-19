@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using AHNet.Web.Data;
 using AHNet.Web.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 
 namespace AHNet.Web
 {
@@ -46,7 +48,7 @@ namespace AHNet.Web
             services.AddMvc();
 
             services.AddSingleton(_ => Configuration);
-            
+
             services.AddTransient<SeedData>();
         }
 
@@ -57,7 +59,7 @@ namespace AHNet.Web
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -73,27 +75,33 @@ namespace AHNet.Web
 
             app.UseIdentity();
 
-            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            app.UseCookieAuthentication(GetCookieAuthenticationConfiguration());
+
+            app.UseMvc(ConfigureRoutes);
+
+            await seedData.InitializeAsync();
+        }
+
+        private CookieAuthenticationOptions GetCookieAuthenticationConfiguration()
+        {
+            return new CookieAuthenticationOptions()
             {
                 AuthenticationScheme = "Cookie",
                 LoginPath = new PathString("/Admin/Account/Login"),
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true
-                
-            });
+            };
+        }
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+        private void ConfigureRoutes(IRouteBuilder routeBuilder)
+        {
+            routeBuilder.MapRoute(
+                name: "adminRoute",
+                template: "{area:exists}/{controller=Dashboard}/{action=Index}");
 
-                routes.MapRoute(
-                    name: "adminRoute",
-                    template: "{area:exists}/{controller=Dashboard}/{action=Index}");
-            });
-
-            await seedData.InitializeAsync();
+            routeBuilder.MapRoute(
+                name: "default",
+                template: "{controller=Home}/{action=Index}/{id?}");
         }
     }
 }

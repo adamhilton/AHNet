@@ -10,8 +10,8 @@ namespace AHNet.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class AccountController : Controller
     {
-        private SignInManager<User> _signInManager;
-        private UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
 
         public AccountController(UserManager<User> userManager,
                                 SignInManager<User> signInManager)
@@ -22,21 +22,23 @@ namespace AHNet.Web.Areas.Admin.Controllers
 
         [HttpGet]
         public IActionResult Login(string returnUrl = "")
+
         {
             var model = new LoginViewModel { ReturnUrl = returnUrl };
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost, AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
-
-                if (result.Succeeded)
+                var loginResult = await _signInManager.PasswordSignInAsync(
+                                            model.Username, model.Password, 
+                                            model.RememberMe, false);
+                if (loginResult.Succeeded)
                 {
-                    if (!string.IsNullOrWhiteSpace(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    if (Url.IsLocalUrl(model.ReturnUrl))
                     {
                         return Redirect(model.ReturnUrl);
                     }
@@ -46,7 +48,7 @@ namespace AHNet.Web.Areas.Admin.Controllers
                     }
                 }
             }
-            ModelState.AddModelError("", "Invalid login attempt");
+            ModelState.AddModelError("", "Could not log in");
             return View(model);
         }
 
