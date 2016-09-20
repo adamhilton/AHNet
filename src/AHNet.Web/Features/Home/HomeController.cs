@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace AHNet.Web.Controllers
+namespace AHNet.Web.Features.Home
 {
     public class HomeController : Controller
     {

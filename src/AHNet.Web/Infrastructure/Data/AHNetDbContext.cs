@@ -1,8 +1,8 @@
-﻿using AHNet.Web.Entities;
+﻿using AHNet.Web.Core.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace AHNet.Web.Data
+namespace AHNet.Web.Infrastructure.Data
 {
     public class AHNetDbContext : IdentityDbContext<User>
     {

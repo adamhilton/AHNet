@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace AHNet.Web.Entities
+namespace AHNet.Web.Core.Entities
 {
     public class User : IdentityUser
     {

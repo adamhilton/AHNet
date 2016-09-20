@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using AHNet.Web.Entities;
-using AHNet.Web.Extensions;
+using AHNet.Web.Core.Entities;
+using AHNet.Web.Core.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 
-namespace AHNet.Web.Data
+namespace AHNet.Web.Infrastructure.Data
 {
     public class SeedData
     {
@@ -32,7 +32,7 @@ namespace AHNet.Web.Data
 
         private bool NoUsersExist()
         {
-            return !_ctx.Users.Any();
+            return true;//_ctx.Users?.Any() ?? true; 
         }
 
         private async Task CreateAdminAsync()

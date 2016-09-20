@@ -1,13 +1,12 @@
-﻿using AHNet.Web.Areas.Admin.ViewModels;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using AHNet.Web.Entities;
+using AHNet.Web.Core.Entities;
+using AHNet.Web.Features.Admin.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 
-namespace AHNet.Web.Areas.Admin.Controllers
+namespace AHNet.Web.Features.Admin
 {
-    [Area("Admin")]
     public class AccountController : Controller
     {
         private readonly SignInManager<User> _signInManager;
@@ -44,7 +43,7 @@ namespace AHNet.Web.Areas.Admin.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Dashboard");
+                        return RedirectToAction("Index", "Admin");
                     }
                 }
             }
@@ -57,7 +56,7 @@ namespace AHNet.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Account", new { Area = "Admin" });
+            return RedirectToAction("Login", "Account");
         }
 
     }

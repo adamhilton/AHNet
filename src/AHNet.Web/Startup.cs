@@ -1,15 +1,15 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using AHNet.Web.Data;
-using AHNet.Web.Entities;
+using AHNet.Web.Infrastructure.Data;
+using AHNet.Web.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using AHNet.Web.Core;
 
 namespace AHNet.Web
 {
@@ -45,7 +45,19 @@ namespace AHNet.Web
                 .AddEntityFrameworkStores<AHNetDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddMvc(options => options.Conventions.Add(new FeatureConvention()))
+                .AddRazorOptions(options => {
+                    // {0} - Action Name
+                    // {1} - Controller Name
+                    // {2} - Area Name
+                    // {3} - Feature Name
+                    // Replace normal view location entirely
+                    options.ViewLocationFormats.Clear();
+                    options.ViewLocationFormats.Add("/Features/{3}/{1}/{0}.cshtml");
+                    options.ViewLocationFormats.Add("/Features/{3}/{0}.cshtml");
+                    options.ViewLocationFormats.Add("/Features/Shared/{0}.cshtml");
+                    options.ViewLocationExpanders.Add(new FeatureViewLocationExpander());
+                });
 
             services.AddSingleton(_ => Configuration);
 
@@ -87,7 +99,7 @@ namespace AHNet.Web
             return new CookieAuthenticationOptions()
             {
                 AuthenticationScheme = "Cookie",
-                LoginPath = new PathString("/Admin/Account/Login"),
+                LoginPath = new PathString("/Account/Login"),
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true
             };
@@ -95,10 +107,6 @@ namespace AHNet.Web
 
         private void ConfigureRoutes(IRouteBuilder routeBuilder)
         {
-            routeBuilder.MapRoute(
-                name: "adminRoute",
-                template: "{area:exists}/{controller=Dashboard}/{action=Index}");
-
             routeBuilder.MapRoute(
                 name: "default",
                 template: "{controller=Home}/{action=Index}/{id?}");

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using AHNet.Web.Data;
+using AHNet.Web.Infrastructure.Data;
 
 namespace AHNet.Web.Migrations
 {
@@ -15,7 +15,7 @@ namespace AHNet.Web.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431");
 
-            modelBuilder.Entity("AHNet.Web.Entities.User", b =>
+            modelBuilder.Entity("AHNet.Web.Core.Entities.User", b =>
                 {
                     b.Property<string>("Id");
 
@@ -181,7 +181,7 @@ namespace AHNet.Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("AHNet.Web.Entities.User")
+                    b.HasOne("AHNet.Web.Core.Entities.User")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -189,7 +189,7 @@ namespace AHNet.Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("AHNet.Web.Entities.User")
+                    b.HasOne("AHNet.Web.Core.Entities.User")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -202,7 +202,7 @@ namespace AHNet.Web.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("AHNet.Web.Entities.User")
+                    b.HasOne("AHNet.Web.Core.Entities.User")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

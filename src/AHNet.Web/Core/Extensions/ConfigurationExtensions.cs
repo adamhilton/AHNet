@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace AHNet.Web.Extensions
+namespace AHNet.Web.Core.Extensions
 {
     public static class ConfigurationExtensions
     {
