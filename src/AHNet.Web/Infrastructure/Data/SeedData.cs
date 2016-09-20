@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using AHNet.Web.Core.Entities;
+﻿using AHNet.Web.Core.Entities;
 using AHNet.Web.Core.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace AHNet.Web.Infrastructure.Data
 {
@@ -32,7 +32,7 @@ namespace AHNet.Web.Infrastructure.Data
 
         private bool NoUsersExist()
         {
-            return true;//_ctx.Users?.Any() ?? true; 
+            return !_ctx.Users?.Any() ?? true;
         }
 
         private async Task CreateAdminAsync()
