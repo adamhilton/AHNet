@@ -10,6 +10,7 @@ using AHNet.Web.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using AHNet.Web.Core;
+using AHNet.Web.Core.Interfaces;
 
 namespace AHNet.Web
 {
@@ -62,6 +63,8 @@ namespace AHNet.Web
             services.AddSingleton(_ => Configuration);
 
             services.AddTransient<SeedData>();
+
+            services.AddScoped<IRepository<BlogPost>, AHNetRepository<BlogPost>>();
         }
 
         public async void Configure(IApplicationBuilder app,

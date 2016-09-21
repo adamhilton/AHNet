@@ -10,5 +10,7 @@ namespace AHNet.Web.Infrastructure.Data
             : base(options)
         {
         }
+
+        public DbSet<BlogPost> BlogPosts { get; set; }
     }
 }

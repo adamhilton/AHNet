@@ -1,0 +1,8 @@
+@model IEnumerable<AHNet.Web.Core.Entities.Post>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>@item.Title</li>
+    }
+</ul>
