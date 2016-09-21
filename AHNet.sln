@@ -1,20 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C32C2EB9-F18D-47EF-94FE-450EDFB4825F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C3399FC9-9AC4-4E69-811A-2EA0939FE5C2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{11A00E51-39EE-4C51-98D4-256EBEFFCB3F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CAB659C0-D680-4975-B481-42FBABF5ACA0}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
 		global.json = global.json
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AHNet.Web", "src\AHNet.Web\AHNet.Web.xproj", "{A6AB9034-8229-4080-A8BF-32615D32B255}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AHNet.Web.Tests", "src\AHNet.Web.Tests\AHNet.Web.Tests.xproj", "{604FC54E-561E-4FE6-954B-92575BE54BAD}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AHNet.Web", "src\AHNet.Web\AHNet.Web.xproj", "{3D3C59DA-C470-409E-9229-B69946C9D36C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,20 +20,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A6AB9034-8229-4080-A8BF-32615D32B255}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A6AB9034-8229-4080-A8BF-32615D32B255}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A6AB9034-8229-4080-A8BF-32615D32B255}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A6AB9034-8229-4080-A8BF-32615D32B255}.Release|Any CPU.Build.0 = Release|Any CPU
-		{604FC54E-561E-4FE6-954B-92575BE54BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{604FC54E-561E-4FE6-954B-92575BE54BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{604FC54E-561E-4FE6-954B-92575BE54BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{604FC54E-561E-4FE6-954B-92575BE54BAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D3C59DA-C470-409E-9229-B69946C9D36C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D3C59DA-C470-409E-9229-B69946C9D36C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D3C59DA-C470-409E-9229-B69946C9D36C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D3C59DA-C470-409E-9229-B69946C9D36C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A6AB9034-8229-4080-A8BF-32615D32B255} = {C32C2EB9-F18D-47EF-94FE-450EDFB4825F}
-		{604FC54E-561E-4FE6-954B-92575BE54BAD} = {C32C2EB9-F18D-47EF-94FE-450EDFB4825F}
+		{3D3C59DA-C470-409E-9229-B69946C9D36C} = {C3399FC9-9AC4-4E69-811A-2EA0939FE5C2}
 	EndGlobalSection
 EndGlobal
