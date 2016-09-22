@@ -30,12 +30,19 @@ namespace AHNet.Web.Features.Admin
         }
 
         [HttpGet]
+        public IActionResult CreateBlogPost()
+        {
+            var model = new CreateBlogPostViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
         public IActionResult CreateBlogPost(CreateBlogPostViewModel model)
         {
-            if (model == null)
+            if (ModelState.IsValid)
             {
-                model = new CreateBlogPostViewModel();
-            } 
+                return RedirectToAction("BlogPosts");
+            }
             return View(model);
         }
     }

@@ -8,3 +8,11 @@
     padding-right: 15px;
 }
 
+input {
+    max-width: 280px;
+    margin-top: 8px;
+}
+
+label {
+    margin-top: 8px;
+}
