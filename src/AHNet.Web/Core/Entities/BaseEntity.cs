@@ -1,4 +1,3 @@
-using System;
 
 namespace AHNet.Web.Core.Entities
 {

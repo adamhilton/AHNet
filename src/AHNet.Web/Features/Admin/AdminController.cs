@@ -1,5 +1,6 @@
 using AHNet.Web.Core.Entities;
 using AHNet.Web.Core.Interfaces;
+using AHNet.Web.Features.Admin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,10 +22,21 @@ namespace AHNet.Web.Features.Admin
             return View();
         }
 
+        [HttpGet]
         public IActionResult BlogPosts()
         {
             var posts = _blogPostRepository.List();
             return View(posts);
+        }
+
+        [HttpGet]
+        public IActionResult CreateBlogPost(CreateBlogPostViewModel model)
+        {
+            if (model == null)
+            {
+                model = new CreateBlogPostViewModel();
+            } 
+            return View(model);
         }
     }
 }

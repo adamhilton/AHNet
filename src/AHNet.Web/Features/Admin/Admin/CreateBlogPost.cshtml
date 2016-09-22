@@ -1,0 +1,26 @@
+@model AHNet.Web.Features.Admin.CreateBlogPostViewModel
+
+<form asp-controller="Admin" asp-action="CreateBlogPost">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>   
+        <label asp-for="Title"></label>
+        <input asp-for="Title">
+    </div>
+    <div>
+        <span asp-validation-for="Title"></span>
+    </div>
+    <div>   
+        <label asp-for="Body"></label>
+        <input asp-for="Body">
+    </div>
+    <div>
+        <span asp-validation-for="Body"></span>
+    </div>
+    <div>   
+        <label asp-for="DatePublished"></label>
+        <input asp-for="DatePublished">
+    </div>
+    <div>
+        <span asp-validation-for="Title"></span>
+    </div>
+</form>

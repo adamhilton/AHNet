@@ -1,4 +1,6 @@
-@model IEnumerable<AHNet.Web.Core.Entities.Post>
+@model IEnumerable<AHNet.Web.Core.Entities.BlogPost>
+
+<a asp-controller="Admin" asp-action="CreateBlogPost">Create blog post</a>
 
 <ul>
     @foreach (var item in Model)

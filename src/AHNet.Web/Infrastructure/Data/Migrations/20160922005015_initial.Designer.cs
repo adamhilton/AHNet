@@ -8,13 +8,29 @@ using AHNet.Web.Infrastructure.Data;
 namespace AHNet.Web.Migrations
 {
     [DbContext(typeof(AHNetDbContext))]
-    [Migration("20160919233453_initial")]
+    [Migration("20160922005015_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431");
+
+            modelBuilder.Entity("AHNet.Web.Core.Entities.BlogPost", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Body");
+
+                    b.Property<DateTime>("DatePublished");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BlogPosts");
+                });
 
             modelBuilder.Entity("AHNet.Web.Core.Entities.User", b =>
                 {
