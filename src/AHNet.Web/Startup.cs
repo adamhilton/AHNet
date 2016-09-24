@@ -64,7 +64,9 @@ namespace AHNet.Web
 
             services.AddTransient<SeedData>();
 
-            services.AddScoped<IRepository<BlogPost>, AHNetRepository<BlogPost>>();
+            services.AddScoped<AHNetDbContext>();
+            
+            services.AddScoped<BlogPostRepository>();
         }
 
         public async void Configure(IApplicationBuilder app,
@@ -73,17 +75,21 @@ namespace AHNet.Web
                         SeedData seedData)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
             {
+                loggerFactory.AddDebug(LogLevel.Information);
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                loggerFactory.AddConsole(LogLevel.Error);
+                
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+                app.UseExceptionHandler("/Error/{0}");
             }
 
             app.UseStaticFiles();

@@ -42,7 +42,9 @@
     "Microsoft.AspNet.Mvc.Abstractions": "6.0.0-rc1-final",
 
     "Serilog.Extensions.Logging": "1.2.0",
-    "Serilog.Sinks.ColoredConsole": "2.0.0"
+    "Serilog.Sinks.ColoredConsole": "2.0.0",
+
+    "AutoMapper": "5.1.1"
   },
 
   "tools": {

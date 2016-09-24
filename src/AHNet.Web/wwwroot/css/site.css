@@ -16,3 +16,18 @@ input {
 label {
     margin-top: 8px;
 }
+
+pre {
+    border: 0; 
+    background-color: transparent;
+}
+
+footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: #000000 solid 1px;
+}
+
+body::after {
+    background-color: rebeccapurple
+}

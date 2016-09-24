@@ -1,6 +1,4 @@
-using AHNet.Web.Core.Entities;
-using AHNet.Web.Core.Interfaces;
-using AHNet.Web.Features.Admin;
+using AHNet.Web.Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,9 +7,9 @@ namespace AHNet.Web.Features.Admin
     [Authorize]
     public class AdminController : Controller
     {
-        private readonly IRepository<BlogPost> _blogPostRepository;
+        private readonly BlogPostRepository _blogPostRepository;
 
-        public AdminController(IRepository<BlogPost> blogPostRepository)
+        public AdminController(BlogPostRepository blogPostRepository)
         {
             _blogPostRepository = blogPostRepository;
         }
@@ -25,7 +23,7 @@ namespace AHNet.Web.Features.Admin
         [HttpGet]
         public IActionResult BlogPosts()
         {
-            var posts = _blogPostRepository.List();
+            var posts = _blogPostRepository.Take(5);
             return View(posts);
         }
 
