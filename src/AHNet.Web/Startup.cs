@@ -10,7 +10,6 @@ using AHNet.Web.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using AHNet.Web.Core;
-using AHNet.Web.Core.Interfaces;
 
 namespace AHNet.Web
 {
@@ -46,28 +45,16 @@ namespace AHNet.Web
                 .AddEntityFrameworkStores<AHNetDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc(options => options.Conventions.Add(new FeatureConvention()))
-                .AddRazorOptions(options => {
-                    // {0} - Action Name
-                    // {1} - Controller Name
-                    // {2} - Area Name
-                    // {3} - Feature Name
-                    // Replace normal view location entirely
-                    options.ViewLocationFormats.Clear();
-                    options.ViewLocationFormats.Add("/Features/{3}/{1}/{0}.cshtml");
-                    options.ViewLocationFormats.Add("/Features/{3}/{0}.cshtml");
-                    options.ViewLocationFormats.Add("/Features/Shared/{0}.cshtml");
-                    options.ViewLocationExpanders.Add(new FeatureViewLocationExpander());
-                });
+            services.AddMvcWithFeatureRouting();
 
             services.AddSingleton(_ => Configuration);
 
             services.AddTransient<SeedData>();
 
-            services.AddScoped<AHNetDbContext>();
-            
             services.AddScoped<BlogPostRepository>();
         }
+
+
 
         public async void Configure(IApplicationBuilder app,
                         IHostingEnvironment env,
@@ -80,17 +67,16 @@ namespace AHNet.Web
             {
                 loggerFactory.AddDebug(LogLevel.Information);
                 app.UseDeveloperExceptionPage();
-                app.UseStatusCodePagesWithReExecute("/Error/{0}");
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
             else
             {
                 loggerFactory.AddConsole(LogLevel.Error);
-                
-                app.UseStatusCodePagesWithReExecute("/Error/{0}");
                 app.UseExceptionHandler("/Error/{0}");
             }
+
+            app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
             app.UseStaticFiles();
 
@@ -103,7 +89,7 @@ namespace AHNet.Web
             await seedData.InitializeAsync();
         }
 
-        private CookieAuthenticationOptions GetCookieAuthenticationConfiguration()
+        private static CookieAuthenticationOptions GetCookieAuthenticationConfiguration()
         {
             return new CookieAuthenticationOptions()
             {
@@ -114,11 +100,27 @@ namespace AHNet.Web
             };
         }
 
-        private void ConfigureRoutes(IRouteBuilder routeBuilder)
+        private static void ConfigureRoutes(IRouteBuilder routeBuilder)
         {
             routeBuilder.MapRoute(
                 name: "default",
                 template: "{controller=Home}/{action=Index}/{id?}");
+        }
+    }
+
+    public static class StartupExtensionMethods
+    {
+        public static void AddMvcWithFeatureRouting(this IServiceCollection services)
+        {
+            services.AddMvc(options => options.Conventions.Add(new FeatureConvention()))
+                .AddRazorOptions(options =>
+                {
+                    options.ViewLocationFormats.Clear();
+                    options.ViewLocationFormats.Add("/Features/{3}/{1}/{0}.cshtml");
+                    options.ViewLocationFormats.Add("/Features/{3}/{0}.cshtml");
+                    options.ViewLocationFormats.Add("/Features/Shared/{0}.cshtml");
+                    options.ViewLocationExpanders.Add(new FeatureViewLocationExpander());
+                });
         }
     }
 }
