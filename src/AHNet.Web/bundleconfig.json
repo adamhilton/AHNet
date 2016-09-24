@@ -6,9 +6,43 @@
     ]
   },
   {
+    "outputFileName": "wwwroot/css/highlight.css",
+    "inputFiles": [
+      "wwwroot/lib/highlight/src/styles/ocean.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/highlight.min.css",
+    "inputFiles": [
+      "wwwroot/lib/highlight/src/styles/ocean.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
       "wwwroot/js/site.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/hightlight.pack.js",
+    "inputFiles": [
+      "wwwroot/lib/highlight/build/highlight.pack.js"
+    ],
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/hightlight.pack.min.js",
+    "inputFiles": [
+      "wwwroot/lib/highlight/build/highlight.pack.min.js"
     ],
     "minify": {
       "enabled": true,

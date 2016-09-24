@@ -1,0 +1,8 @@
+@model AHNet.Web.Features.Blog.ViewModels.BlogIndexViewModel
+
+<ul>
+    @foreach (var item in Model.BlogPosts)
+    {
+        <li>@item.Title - @item.DatePublished</li>
+    }
+</ul>

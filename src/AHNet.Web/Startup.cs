@@ -10,6 +10,9 @@ using AHNet.Web.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using AHNet.Web.Core;
+using AHNet.Web.Core.AutoMapper;
+using AHNet.Web.Features.Blog.ViewModels;
+using AutoMapper;
 
 namespace AHNet.Web
 {
@@ -31,10 +34,19 @@ namespace AHNet.Web
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            InitializeMapperConfiguration();
+        }
+
+        private void InitializeMapperConfiguration()
+        {
+            _mapperConfiguration = new MapperConfiguration(cfg => { cfg.AddProfile(new AutoMapperProfileConfiguration()); });
         }
 
         public IConfigurationRoot Configuration { get; }
         public IHostingEnvironment CurrentEnvironment { get; }
+
+        private MapperConfiguration _mapperConfiguration { get; set; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -52,6 +64,8 @@ namespace AHNet.Web
             services.AddTransient<SeedData>();
 
             services.AddScoped<BlogPostRepository>();
+
+            services.AddSingleton<IMapper>(sp => _mapperConfiguration.CreateMapper());
         }
 
 
