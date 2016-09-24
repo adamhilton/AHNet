@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using AHNet.Web.Core;
 using AHNet.Web.Core.AutoMapper;
-using AHNet.Web.Features.Blog.ViewModels;
 using AutoMapper;
 
 namespace AHNet.Web
@@ -66,6 +65,7 @@ namespace AHNet.Web
             services.AddScoped<BlogPostRepository>();
 
             services.AddSingleton<IMapper>(sp => _mapperConfiguration.CreateMapper());
+
         }
 
 
@@ -99,7 +99,7 @@ namespace AHNet.Web
             app.UseCookieAuthentication(GetCookieAuthenticationConfiguration());
 
             app.UseMvc(ConfigureRoutes);
-
+           
             await seedData.InitializeAsync();
         }
 
@@ -127,6 +127,7 @@ namespace AHNet.Web
         public static void AddMvcWithFeatureRouting(this IServiceCollection services)
         {
             services.AddMvc(options => options.Conventions.Add(new FeatureConvention()))
+                .AddTagHelpersAsServices()
                 .AddRazorOptions(options =>
                 {
                     options.ViewLocationFormats.Clear();

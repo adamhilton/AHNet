@@ -1,8 +1,20 @@
 @model AHNet.Web.Features.Blog.ViewModels.BlogIndexViewModel
 
-<ul>
-    @foreach (var item in Model.BlogPosts)
-    {
-        <li>@item.Title - @item.DatePublished</li>
-    }
-</ul>
+<div class="row">
+    <ul>
+        @foreach (var item in Model.BlogPosts)
+        {
+            <li>
+                <a ahnet-blog-title="@item.UrlTitle">
+                    @item.Title - @item.DatePublished
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        hljs.initHighlightingOnLoad();
+    </script>
+}

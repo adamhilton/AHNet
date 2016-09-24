@@ -2,12 +2,26 @@
     ViewData["Title"] = "Home Page";
 }
 
-<pre class="col-md-offset-1 col-md-9 pre-unstyled">
-    <code class="c#">
-        Console.WriteLine("hello");
-        List<User> users = new HashSet();
-    </code>
-</pre>
+<div class="row">
+
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 pre-unstyled">
+
+        @for (int i = 0; i < 5; i++)
+        {
+            <div>
+                
+            </div>
+        }
+    </div>
+
+    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-12">
+            <div class="text-center">
+                <strong>Adam Hilton</strong>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     <script type="text/javascript">

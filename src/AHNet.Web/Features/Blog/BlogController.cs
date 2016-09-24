@@ -1,3 +1,5 @@
+using System;
+using AHNet.Web.Core.Exceptions;
 using AHNet.Web.Features.Blog.ViewModels;
 using AHNet.Web.Infrastructure.Data;
 using AutoMapper;
@@ -23,13 +25,31 @@ namespace AHNet.Web.Features.Blog
         {
             var blogPosts = _blogPostRepository.Take(5);
             var model = new BlogIndexViewModel();
+            
+                foreach (var blogPost in blogPosts)
+                {
+                    var mappedBlogPost = _mapper.Map<BlogPostPreviewViewModel>(blogPost);
+                    model.BlogPosts.Add(mappedBlogPost);
+                }
 
-            foreach (var blogPost in blogPosts)
+            return View(model);
+        }
+
+        [HttpGet("/Blog/{blogPostTitle}")]
+        public IActionResult BlogPost(string blogPostTitle)
+        {
+            var model = new BlogPostContentViewModel();
+            try
             {
-                var mappedBlogPost = _mapper.Map<BlogPostPreviewViewModel>(blogPost);
-                model.BlogPosts.Add(mappedBlogPost);
+                var blogPost = _blogPostRepository.GetByTitle(blogPostTitle);
+                model = _mapper.Map<BlogPostContentViewModel>(blogPost);
             }
-
+            catch (BlogPostNotFoundException)
+            {
+                //TODO: Log error
+                return NotFound();
+            }
+        
             return View(model);
         }
     }

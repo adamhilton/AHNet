@@ -6,9 +6,10 @@ namespace AHNet.Web.Core.AutoMapper
 {
     public class AutoMapperProfileConfiguration : Profile
     {
-        protected override void Configure()
+        public AutoMapperProfileConfiguration()
         {
             CreateMap<BlogPost, BlogPostPreviewViewModel>();
+            CreateMap<BlogPost, BlogPostContentViewModel>();
         }
     }
 }

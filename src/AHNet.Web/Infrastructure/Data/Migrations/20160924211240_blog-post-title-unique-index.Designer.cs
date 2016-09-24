@@ -8,9 +8,10 @@ using AHNet.Web.Infrastructure.Data;
 namespace AHNet.Web.Migrations
 {
     [DbContext(typeof(AHNetDbContext))]
-    partial class AHNetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160924211240_blog-post-title-unique-index")]
+    partial class blogposttitleuniqueindex
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431");
