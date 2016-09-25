@@ -17,7 +17,9 @@
         <label asp-for="Body" class="col-md-offset-2 col-md-10 control-label"></label>
         <div class="col-md-offset-2 col-md-10 control-label">
             <span asp-validation-for="Body" class="text-danger"></span>
-            <input asp-for="Body" class="form-control">
+            <textarea
+                rows="15" cols="10"
+                asp-for="Body" type="text" class="form-control"></textarea>
         </div>
     </div>
 
@@ -25,7 +27,7 @@
         <label asp-for="DatePublished" class="col-md-offset-2 col-md-10 control-label"></label>
         <div class="col-md-offset-2 col-md-10 control-label">
             <span asp-validation-for="DatePublished" class="text-danger"></span>
-            <input asp-for="DatePublished" class="form-control">
+            <input asp-for="DatePublished" type="date" class="form-control">
         </div>
     </div>
 

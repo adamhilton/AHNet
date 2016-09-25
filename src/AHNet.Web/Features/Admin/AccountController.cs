@@ -51,7 +51,6 @@ namespace AHNet.Web.Features.Admin
             return View(model);
         }
 
-        [HttpPost]
         [Authorize]
         public async Task<IActionResult> Logout()
         {

@@ -1,6 +1,6 @@
 ﻿@inject SignInManager<User> SignInManager
 
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#404040; background-color:rgba(0,0,0,0.8);">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,6 +17,12 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="navbar-link"><a asp-controller="Admin" asp-action="BlogPosts">blogs</a></li>
+                    <li class="navbar-link">
+                        <a asp-controller="Account" asp-action="Logout">
+                            logout
+                            <i class="fa fa-sign-out"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
         }
