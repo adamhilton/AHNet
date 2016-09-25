@@ -1,0 +1,19 @@
+﻿@model IEnumerable<AHNet.Web.Features.Blog.ViewModels.BlogPostPreviewViewModel>
+
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <a ahnet-blog-title="@item.UrlTitle">
+                    @item.Title - @item.DatePublished
+                </a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <h3 class="text-center">No blog posts have been posted yet... Please come back later!</h3>
+}

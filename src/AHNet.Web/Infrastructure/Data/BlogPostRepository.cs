@@ -1,9 +1,11 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AHNet.Web.Core.Entities;
 using AHNet.Web.Core.Exceptions;
 using AHNet.Web.Core.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace AHNet.Web.Infrastructure.Data
 {
@@ -15,16 +17,16 @@ namespace AHNet.Web.Infrastructure.Data
         {
         }
 
-        public IEnumerable<BlogPost> Take(int count)
+        public async Task<IEnumerable<BlogPost>> Take(int count)
         {
-            return _dbSet.Take(count).ToList();
+            return await _dbSet.Take(count).ToListAsync();
         }
 
         public BlogPost GetByTitle(string blogPostTitle)
         {
             var blogPost = _dbSet.FirstOrDefault(
                 w => string.Equals(
-                    w.Title.RemoveSpecialCharacters(), 
+                    w.Title.RemoveSpecialCharacters(),
                     blogPostTitle,
                     StringComparison.CurrentCultureIgnoreCase
                 )
@@ -34,7 +36,7 @@ namespace AHNet.Web.Infrastructure.Data
             {
                 throw new BlogPostNotFoundException();
             }
-            
+
             return blogPost;
         }
     }

@@ -1,4 +1,3 @@
-using System;
 using AHNet.Web.Core.Exceptions;
 using AHNet.Web.Features.Blog.ViewModels;
 using AHNet.Web.Infrastructure.Data;
@@ -23,15 +22,8 @@ namespace AHNet.Web.Features.Blog
         [HttpGet]
         public IActionResult Index()
         {
-            var blogPosts = _blogPostRepository.Take(5);
             var model = new BlogIndexViewModel();
-            
-                foreach (var blogPost in blogPosts)
-                {
-                    var mappedBlogPost = _mapper.Map<BlogPostPreviewViewModel>(blogPost);
-                    model.BlogPosts.Add(mappedBlogPost);
-                }
-
+          
             return View(model);
         }
 
@@ -49,7 +41,7 @@ namespace AHNet.Web.Features.Blog
                 //TODO: Log error
                 return NotFound();
             }
-        
+
             return View(model);
         }
     }
