@@ -35,7 +35,7 @@ namespace AHNet.Web.Features.Admin
         {
             var posts = await _blogPostRepository.TakeAsync(20);
 
-            var model  = posts.Select(post => _mapper.Map<BlogPostPreviewViewModel>(post)).ToList();
+            var model = posts.Select(post => _mapper.Map<BlogPostPreviewViewModel>(post)).ToList();
 
             return View(model);
         }
@@ -58,6 +58,34 @@ namespace AHNet.Web.Features.Admin
                 return RedirectToAction("BlogPosts");
             }
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult EditBlogPost(string name)
+        {
+            var blogPost = _blogPostRepository.GetByTitle(name);
+
+            if (blogPost == null)
+            {
+                return NotFound();
+            }
+
+            var model = _mapper.Map<EditBlogPostViewModel>(blogPost);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditBlogPost(EditBlogPostViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var blogPost = _mapper.Map<BlogPost>(model);
+
+                _blogPostRepository.Update(blogPost);
+            }
+
+            return RedirectToAction("BlogPosts");
         }
     }
 }

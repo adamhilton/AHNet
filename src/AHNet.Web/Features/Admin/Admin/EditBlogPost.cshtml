@@ -1,6 +1,6 @@
-@model AHNet.Web.Features.Admin.Admin.ViewModels.CreateBlogPostViewModel
+﻿@model AHNet.Web.Features.Admin.Admin.ViewModels.EditBlogPostViewModel
 
-<form asp-controller="Admin" asp-action="CreateBlogPost">
+<form asp-controller="Admin" asp-action="EditBlogPost">
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -16,9 +16,8 @@
         <label asp-for="Body" class="col-md-offset-2 col-md-10 control-label"></label>
         <div class="col-md-offset-2 col-md-10 control-label">
             <span asp-validation-for="Body" class="text-danger"></span>
-            <textarea
-                rows="15" cols="10"
-                asp-for="Body" type="text" class="form-control"></textarea>
+            <textarea rows="15" cols="10"
+                      asp-for="Body" type="text" class="form-control"></textarea>
         </div>
     </div>
 
@@ -32,7 +31,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10 control-label">
-            <input type="submit" value="Create" class="btn btn-default"/>
+            <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
 

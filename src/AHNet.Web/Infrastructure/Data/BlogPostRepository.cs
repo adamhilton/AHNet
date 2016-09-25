@@ -28,7 +28,7 @@ namespace AHNet.Web.Infrastructure.Data
             var blogPost = _dbSet.FirstOrDefault(
                 w => string.Equals(
                     w.Title.RemoveSpecialCharacters(),
-                    blogPostTitle,
+                    blogPostTitle.RemoveSpecialCharacters(),
                     StringComparison.CurrentCultureIgnoreCase
                 )
             );

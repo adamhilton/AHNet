@@ -5,6 +5,10 @@
 <ul>
     @foreach (var item in Model)
     {
-        <li>@item.Title - @item.DatePublished.ToString("D")</li>
+        <li>
+            <a asp-controller="Admin" asp-action="EditBlogPost" asp-route-name="@item.UrlTitle">
+                @item.Title - @item.DatePublished.ToString("D")
+            </a>
+        </li>
     }
 </ul>
