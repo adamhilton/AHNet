@@ -31,9 +31,9 @@ namespace AHNet.Web.Features.Admin
         }
 
         [HttpGet]
-        public async Task<IActionResult> BlogPosts()
+        public IActionResult BlogPosts()
         {
-            var posts = await _blogPostRepository.TakeAsync(20);
+            var posts = _blogPostRepository.ToPagedList(1, 30);
 
             var model = posts.Select(post => _mapper.Map<BlogPostPreviewViewModel>(post)).ToList();
 
@@ -80,7 +80,11 @@ namespace AHNet.Web.Features.Admin
         {
             if (ModelState.IsValid)
             {
-                var blogPost = _mapper.Map<BlogPost>(model);
+                var blogPost = _blogPostRepository.GetByTitle(model.Title);
+
+                blogPost.Title = model.Title;
+                blogPost.Body = model.Body;
+                blogPost.DatePublished = model.DatePublished;
 
                 _blogPostRepository.Update(blogPost);
             }

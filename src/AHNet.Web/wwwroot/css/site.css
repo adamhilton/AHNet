@@ -5,6 +5,9 @@
 
 input {
     max-width: 280px;
+}
+
+input, textarea {
     margin-bottom: 26px;
 }
 

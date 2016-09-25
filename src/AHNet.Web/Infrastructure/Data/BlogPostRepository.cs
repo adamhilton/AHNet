@@ -43,7 +43,7 @@ namespace AHNet.Web.Infrastructure.Data
 
         public IList<BlogPost> ToPagedList(int pageNumber, int pageSize)
         {
-            return _dbSet?.ToPagedList(pageSize, pageNumber)?.ToList();
+            return _dbSet.OrderByDescending(o => o.DatePublished).ToPagedList(pageSize, pageNumber).ToList();
         }
     }
 }
