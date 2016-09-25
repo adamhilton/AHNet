@@ -6,6 +6,7 @@ using AHNet.Web.Core.Entities;
 using AHNet.Web.Core.Exceptions;
 using AHNet.Web.Core.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Sakura.AspNetCore;
 
 namespace AHNet.Web.Infrastructure.Data
 {
@@ -17,7 +18,7 @@ namespace AHNet.Web.Infrastructure.Data
         {
         }
 
-        public async Task<IEnumerable<BlogPost>> Take(int count)
+        public async Task<IEnumerable<BlogPost>> TakeAsync(int count)
         {
             return await _dbSet.Take(count).ToListAsync();
         }
@@ -38,6 +39,11 @@ namespace AHNet.Web.Infrastructure.Data
             }
 
             return blogPost;
+        }
+
+        public IList<BlogPost> ToPagedList(int pageNumber, int pageSize)
+        {
+            return _dbSet?.ToPagedList(pageSize, pageNumber)?.ToList();
         }
     }
 }

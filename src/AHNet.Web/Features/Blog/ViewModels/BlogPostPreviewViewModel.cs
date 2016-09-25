@@ -8,9 +8,9 @@ namespace AHNet.Web.Features.Blog.ViewModels
     {
         public string Title { get; set; }
         public string UrlTitle => Title?.RemoveSpecialCharacters();
-    
+
         [Display(Name = "Date Published")]
         public DateTime DatePublished { get; set; }
-        
+
     }
 }

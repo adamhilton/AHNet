@@ -1,8 +1,7 @@
-
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace AHNet.Web.Features.Admin
+namespace AHNet.Web.Features.Admin.Admin.ViewModels
 {
     public class CreateBlogPostViewModel
     {
@@ -10,7 +9,8 @@ namespace AHNet.Web.Features.Admin
         public string Title { get; set; }
         [Required]
         public string Body { get; set; }
+
         [Display(Name = "Date Published")]
-        public DateTime DatePublished { get; set; }
+        public DateTime DatePublished { get; set; } = DateTime.UtcNow;
     }
 }

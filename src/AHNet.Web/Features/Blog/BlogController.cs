@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using AHNet.Web.Core.Exceptions;
 using AHNet.Web.Features.Blog.ViewModels;
 using AHNet.Web.Infrastructure.Data;
@@ -20,10 +23,28 @@ namespace AHNet.Web.Features.Blog
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
-            var model = new BlogIndexViewModel();
-          
+            var pageSize = 3;
+            var pageNumber = (page ?? 1);
+
+            List<BlogPostPreviewViewModel> posts;
+            try
+            {
+                posts = _blogPostRepository.ToPagedList(pageNumber, pageSize)
+                    .Select(post => _mapper.Map<BlogPostPreviewViewModel>(post))
+                    .ToList();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return Redirect("/Error");
+            }
+
+            var model = new BlogIndexViewModel()
+            {
+                BlogPosts = posts
+            };
+
             return View(model);
         }
 

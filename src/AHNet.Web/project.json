@@ -44,6 +44,8 @@
     "Serilog.Extensions.Logging": "1.2.0",
     "Serilog.Sinks.ColoredConsole": "2.0.0",
 
+    "Sakura.AspNetCore.PagedList": "2.0.1",
+
     "AutoMapper": "5.1.1"
   },
 

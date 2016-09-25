@@ -22,7 +22,7 @@ namespace AHNet.Web.Features.Shared.Components.RecentBlogPosts
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var blogPosts = await _blogPostRepository.Take(5);
+            var blogPosts = await _blogPostRepository.TakeAsync(5);
             var model = new List<BlogPostPreviewViewModel>();
 
             foreach (var blogPost in blogPosts)
@@ -35,3 +35,4 @@ namespace AHNet.Web.Features.Shared.Components.RecentBlogPosts
         }
     }
 }
+ 

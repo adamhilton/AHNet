@@ -5,11 +5,11 @@
 
 input {
     max-width: 280px;
-    margin-top: 8px;
+    margin-bottom: 26px;
 }
 
 label {
-    margin-top: 8px;
+    margin-bottom: 4px;
 }
 
 pre {
@@ -20,6 +20,7 @@ pre {
 .bottom-bar {
     text-align: center;
     padding-top: 20px;
+    margin-top: 20px;
     border-top: #000000 solid 1px;
 }
 

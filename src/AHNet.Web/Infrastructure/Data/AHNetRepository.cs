@@ -11,7 +11,7 @@ namespace AHNet.Web.Infrastructure.Data
         protected readonly DbSet<T> _dbSet;
         protected readonly AHNetDbContext _dbContext;
 
-        public AHNetRepository(AHNetDbContext dbContext)
+        protected AHNetRepository(AHNetDbContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<T>();

@@ -1,6 +1,15 @@
 @model AHNet.Web.Features.Blog.ViewModels.BlogIndexViewModel
 
-@await Component.InvokeAsync("RecentBlogPosts")
+<ul>
+    @foreach (var item in Model.BlogPosts)
+    {
+        <li>
+            <a ahnet-blog-title="@item.UrlTitle">
+                @item.Title - @item.DatePublished.ToString("D")
+            </a>
+        </li>
+    }
+</ul>
 
 @section Scripts {
     <script type="text/javascript">

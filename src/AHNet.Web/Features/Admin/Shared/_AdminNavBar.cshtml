@@ -1,4 +1,6 @@
-﻿<div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#000000; background-color:rgba(0,0,0,0.8);">
+﻿@inject SignInManager<User> SignInManager
+
+<div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -9,10 +11,14 @@
             </button>
             <a asp-controller="Home" asp-action="Index" class="navbar-brand">adamhilton.net</a>
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="navbar-link"><a asp-controller="Blog" asp-action="Index">blog</a></li>
-            </ul>
-        </div>
+
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="navbar-link"><a asp-controller="Admin" asp-action="BlogPosts">blogs</a></li>
+                </ul>
+            </div>
+        }
     </div>
 </div>

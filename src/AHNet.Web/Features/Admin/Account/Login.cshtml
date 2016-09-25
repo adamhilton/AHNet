@@ -1,32 +1,39 @@
-﻿@model AHNet.Web.Features.Admin.Account.LoginViewModel
+﻿@model AHNet.Web.Features.Admin.Account.ViewModels.LoginViewModel
 @{
     ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
+<div class="row">
 
-<form method="post" asp-controller="Account" asp-action="Login" asp-route-returnurl="@Model.ReturnUrl">
-    <div asp-validation-summary="ModelOnly"></div>
+    <div class="col-xs-12 text-center"><h2>Login</h2></div>
+
+
     <div>
-        <label asp-for="Username"></label>
-        <input asp-for="Username">
+        <form method="post" asp-controller="Account" asp-action="Login" asp-route-returnurl="@Model.ReturnUrl">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div>
+                <label asp-for="Username"></label>
+                <input asp-for="Username">
+            </div>
+            <div>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Password"></label>
+                <input asp-for="Password">
+            </div>
+            <div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="RememberMe"></label>
+                <input asp-for="RememberMe">
+            </div>
+            <div>
+                <span asp-validation-for="RememberMe" class="text-danger"></span>
+            </div>
+            <input type="submit" value="Login">
+        </form>
     </div>
-    <div>
-    <span asp-validation-for="Username"></span>
-    </div>
-    <div>
-        <label asp-for="Password"></label>
-        <input asp-for="Password">
-    </div>
-    <div>
-    <span asp-validation-for="Password"></span>
-    </div>
-    <div>
-        <label asp-for="RememberMe"></label>
-        <input asp-for="RememberMe">
-    </div>
-    <div>
-    <span asp-validation-for="RememberMe"></span>
-    </div>
-    <input type="submit" value="Login">
-</form>
+</div>

@@ -1,10 +1,10 @@
-@model IEnumerable<AHNet.Web.Core.Entities.BlogPost>
+@model IEnumerable<AHNet.Web.Features.Blog.ViewModels.BlogPostPreviewViewModel>
 
 <a asp-controller="Admin" asp-action="CreateBlogPost">Create blog post</a>
 
 <ul>
     @foreach (var item in Model)
     {
-        <li>@item.Title</li>
+        <li>@item.Title - @item.DatePublished.ToString("D")</li>
     }
 </ul>

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AHNet.Web.Features.Admin.Account
+namespace AHNet.Web.Features.Admin.Account.ViewModels
 {
     public class LoginViewModel
     {
