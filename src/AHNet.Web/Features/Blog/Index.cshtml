@@ -1,15 +1,6 @@
 @model AHNet.Web.Features.Blog.ViewModels.BlogIndexViewModel
 
-<ul>
-    @foreach (var item in Model.BlogPosts)
-    {
-        <li>
-            <a ahnet-blog-title="@item.UrlTitle">
-                @item.Title - @item.DatePublished.ToString("D")
-            </a>
-        </li>
-    }
-</ul>
+@Html.Partial("_BlogPosts", Model.BlogPosts)
 
 @section Scripts {
     <script type="text/javascript">

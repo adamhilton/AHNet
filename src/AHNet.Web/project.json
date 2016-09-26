@@ -45,6 +45,7 @@
     "Serilog.Sinks.ColoredConsole": "2.0.0",
 
     "Sakura.AspNetCore.PagedList": "2.0.1",
+    "Sakura.AspNetCore.Mvc.PagedList": "2.0.9",
 
     "AutoMapper": "5.1.1"
   },

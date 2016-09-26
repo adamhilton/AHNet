@@ -1,4 +1,4 @@
-@model IEnumerable<AHNet.Web.Features.Blog.ViewModels.BlogPostPreviewViewModel>
+@model Sakura.AspNetCore.IPagedList<BlogPost>
 
 <a asp-controller="Admin" asp-action="CreateBlogPost">Create blog post</a>
 
@@ -12,3 +12,5 @@
         </li>
     }
 </ul>
+
+<pager/>

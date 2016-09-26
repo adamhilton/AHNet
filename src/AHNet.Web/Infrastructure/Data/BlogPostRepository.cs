@@ -41,9 +41,9 @@ namespace AHNet.Web.Infrastructure.Data
             return blogPost;
         }
 
-        public IList<BlogPost> ToPagedList(int pageNumber, int pageSize)
+        public IPagedList<BlogPost> ToPagedList(int pageNumber, int pageSize)
         {
-            return _dbSet.OrderByDescending(o => o.DatePublished).ToPagedList(pageSize, pageNumber).ToList();
+            return _dbSet.OrderByDescending(o => o.DatePublished).ToPagedList(pageSize, pageNumber);
         }
     }
 }

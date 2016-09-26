@@ -1,0 +1,15 @@
+﻿@model Sakura.AspNetCore.IPagedList<BlogPost>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <a ahnet-blog-title="@item.UrlTitle">
+                @item.Title - @item.DatePublished.ToString("D")
+            </a>
+        </li>
+    }
+</ul>
+
+<pager/>
+

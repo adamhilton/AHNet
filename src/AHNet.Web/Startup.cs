@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Routing;
 using AHNet.Web.Core;
 using AHNet.Web.Core.AutoMapper;
 using AutoMapper;
+using Sakura.AspNetCore.Mvc;
 
 namespace AHNet.Web
 {
@@ -65,7 +66,15 @@ namespace AHNet.Web
             services.AddScoped<BlogPostRepository>();
 
             services.AddSingleton<IMapper>(sp => _mapperConfiguration.CreateMapper());
-
+            
+            services.AddBootstrapPagerGenerator(options =>
+            {
+                options.ConfigureDefault();
+                options.HideOnSinglePage = true;
+                options.PagerItemsForEndings = 0;
+                options.ExpandPageItemsForCurrentPage = 2;
+            });
+            
         }
 
 

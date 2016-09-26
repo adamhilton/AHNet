@@ -31,11 +31,12 @@ namespace AHNet.Web.Features.Admin
         }
 
         [HttpGet]
-        public IActionResult BlogPosts()
+        public IActionResult BlogPosts(int? page)
         {
-            var posts = _blogPostRepository.ToPagedList(1, 30);
+            var pageSize = 20;
+            var pageNumber = (page ?? 1);
 
-            var model = posts.Select(post => _mapper.Map<BlogPostPreviewViewModel>(post)).ToList();
+            var model = _blogPostRepository.ToPagedList(pageNumber, pageSize);
 
             return View(model);
         }

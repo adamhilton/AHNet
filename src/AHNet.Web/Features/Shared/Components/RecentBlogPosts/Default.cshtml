@@ -2,12 +2,12 @@
 
 @if (Model.Any())
 {
-    <ul>
+    <ul class="list-inline">
         @foreach (var item in Model)
         {
-            <li>
+            <li class="list-inline-item">
                 <a ahnet-blog-title="@item.UrlTitle">
-                    @item.Title - @item.DatePublished
+                    @item.Title - @item.DatePublished.ToString("D")
                 </a>
             </li>
         }
