@@ -40,3 +40,8 @@ pre {
 .navbar-collapse.in, .navbar-collapse.collapsing{
     background-color:#404040;
 }
+
+pre code {
+    white-space: inherit;
+    overflow-x: scroll;
+}
