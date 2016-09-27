@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace AHNet.Web.Core.Extensions
 {
@@ -18,6 +19,11 @@ namespace AHNet.Web.Core.Extensions
                 }
             }
             return stringBuilder.ToString();
+        }
+
+        public static string ToFormattedString(this DateTime dateTime)
+        {
+            return dateTime.ToString("MMMM d, yyyy");
         }
     }
 }
