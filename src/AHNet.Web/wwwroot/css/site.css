@@ -84,10 +84,17 @@ pre code {
     border: 1px solid #eceeef;
     border-radius: 3px;
     margin-bottom: 12px;
+    padding: 20px;
+}
+
+.blog-post-preview-title {
+    margin-top: 0;
+    margin-bottom: 8px;
 }
 
 .blog-post-preview-info {
     margin-top: 0;
+    margin-bottom: 15px;
 }
 
 p {
