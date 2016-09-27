@@ -18,9 +18,11 @@ namespace AHNet.Web.Infrastructure.Data
         {
         }
 
-        public async Task<IEnumerable<BlogPost>> TakeAsync(int count)
+        public async Task<IEnumerable<BlogPost>> GetRecentPostsAsync()
         {
-            return await _dbSet.Take(count).ToListAsync();
+            return await _dbSet.Where(w => w.IsPublished)
+                .OrderByDescending(o => o.DatePublished)
+                .Take(5).ToListAsync();
         }
 
         public BlogPost GetByTitle(string blogPostTitle)
@@ -44,6 +46,14 @@ namespace AHNet.Web.Infrastructure.Data
         public IPagedList<BlogPost> ToPagedList(int pageNumber, int pageSize)
         {
             return _dbSet.OrderByDescending(o => o.DatePublished).ToPagedList(pageSize, pageNumber);
+        }
+
+        public IPagedList<BlogPost> ToPagedListOfPublishedBlogPosts(int pageNumber, int pageSize)
+        {
+            return _dbSet
+                .Where(w => w.IsPublished)
+                .OrderByDescending(o => o.DatePublished)
+                .ToPagedList(pageSize, pageNumber);
         }
     }
 }

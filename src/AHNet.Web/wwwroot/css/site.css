@@ -45,3 +45,31 @@ pre code {
     white-space: inherit;
     overflow-x: scroll;
 }
+
+.text-align-left {
+    text-align: left;
+}
+
+#side-bar-avatar {
+    display:block;
+    margin:auto;
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.side-bar-section {
+    border-bottom: 1px solid #eceeef;
+}
+
+#recent-posts-list {
+    list-style:none;
+    padding-left:0;
+    text-align: left;
+}
+
+.recent-posts-item {
+    margin-top: 5px;
+}
+
+
+

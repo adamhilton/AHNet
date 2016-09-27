@@ -30,7 +30,7 @@ namespace AHNet.Web.Features.Blog
             var pageSize = 20;
             var pageNumber = (page ?? 1);
 
-            var blogPosts = _blogPostRepository.ToPagedList(pageNumber, pageSize);
+            var blogPosts = _blogPostRepository.ToPagedListOfPublishedBlogPosts(pageNumber, pageSize);
 
             var model = new BlogIndexViewModel()
             {
@@ -47,6 +47,12 @@ namespace AHNet.Web.Features.Blog
             try
             {
                 var blogPost = _blogPostRepository.GetByTitle(blogPostTitle);
+
+                if (!blogPost.IsPublished)
+                {
+                    return NotFound();
+                }
+
                 model = _mapper.Map<BlogPostContentViewModel>(blogPost);
             }
             catch (BlogPostNotFoundException)

@@ -86,6 +86,7 @@ namespace AHNet.Web.Features.Admin
                 blogPost.Title = model.Title;
                 blogPost.Body = model.Body;
                 blogPost.DatePublished = model.DatePublished;
+                blogPost.IsPublished = model.IsPublished;
 
                 _blogPostRepository.Update(blogPost);
             }

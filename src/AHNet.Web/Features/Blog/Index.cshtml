@@ -1,4 +1,9 @@
+@using AHNet.Web.Features.Home
 @model AHNet.Web.Features.Blog.ViewModels.BlogIndexViewModel
+
+@{
+    ViewBag.Title = "blog";
+}
 
 @Html.Partial("_BlogPosts", Model.BlogPosts)
 
