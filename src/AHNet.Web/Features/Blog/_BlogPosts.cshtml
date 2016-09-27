@@ -1,15 +1,34 @@
 ﻿@model Sakura.AspNetCore.IPagedList<BlogPost>
 
-<ul>
-    @foreach (var item in Model)
-    {
-        <li>
-            <a ahnet-blog-title="@item.UrlTitle">
-                @item.Title - @item.DatePublished.ToFormattedString()
-            </a>
-        </li>
-    }
-</ul>
+<div class="row">
+    <div class="col-xs-12 no-padding">
+        <div class="pull-right">
+            <pager />
+        </div>
+    </div>
+</div>
 
-<pager/>
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row blog-post-preview-item">
+
+                <a ahnet-blog-title="@item.UrlTitle">
+                    <h3>@item.Title</h3>
+                </a>
+                <p class="blog-post-preview-info">@item.DatePublished.ToFormattedString()</p>
+                @Html.Raw(item.GetBlogPostSummary())
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-xs-12 no-padding">
+        <div class="pull-right">
+            <pager />
+        </div>
+    </div>
+</div>
 

@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using AHNet.Web.Core.Entities;
 using AHNet.Web.Core.Exceptions;
 using AHNet.Web.Features.Blog.ViewModels;
 using AHNet.Web.Infrastructure.Data;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Sakura.AspNetCore;
 
 namespace AHNet.Web.Features.Blog
 {

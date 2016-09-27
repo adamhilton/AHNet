@@ -66,7 +66,7 @@ namespace AHNet.Web
             services.AddScoped<BlogPostRepository>();
 
             services.AddSingleton<IMapper>(sp => _mapperConfiguration.CreateMapper());
-            
+
             services.AddBootstrapPagerGenerator(options =>
             {
                 options.ConfigureDefault();
@@ -74,7 +74,7 @@ namespace AHNet.Web
                 options.PagerItemsForEndings = 0;
                 options.ExpandPageItemsForCurrentPage = 2;
             });
-            
+
         }
 
 
@@ -108,7 +108,7 @@ namespace AHNet.Web
             app.UseCookieAuthentication(GetCookieAuthenticationConfiguration());
 
             app.UseMvc(ConfigureRoutes);
-           
+
             await seedData.InitializeAsync();
         }
 

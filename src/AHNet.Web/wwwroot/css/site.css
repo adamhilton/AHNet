@@ -50,6 +50,10 @@ pre code {
     text-align: left;
 }
 
+#side-bar {
+    padding: 0 15px 0 15px;
+}
+
 #side-bar-avatar {
     display:block;
     margin:auto;
@@ -71,5 +75,26 @@ pre code {
     margin-top: 5px;
 }
 
+.big-message {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
 
+.blog-post-preview-item {
+    border: 1px solid #eceeef;
+    border-radius: 3px;
+    margin-bottom: 12px;
+}
 
+.blog-post-preview-info {
+    margin-top: 0;
+}
+
+p {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.no-padding {
+    padding: 0;
+}
