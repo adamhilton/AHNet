@@ -1,5 +1,9 @@
 @model Sakura.AspNetCore.IPagedList<BlogPost>
 
+@{
+    ViewBag.Title = "blog posts";
+}
+
 <a asp-controller="Admin" asp-action="CreateBlogPost">Create blog post</a>
 
 <ul>
