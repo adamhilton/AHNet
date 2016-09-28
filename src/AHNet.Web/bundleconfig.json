@@ -6,93 +6,9 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/css/highlight.css",
-    "inputFiles": [
-      "wwwroot/lib/highlight/src/styles/ocean.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/highlight.min.css",
-    "inputFiles": [
-      "wwwroot/lib/highlight/src/styles/ocean.css"
-    ],
-    "minify": {
-      "enabled": true,
-      "renameLocals": true
-    }
-  },
-  {
-    "outputFileName": "wwwroot/css/font-awesome.css",
-    "inputFiles": [
-      "wwwroot/lib/font-awesome/css/font-awesome.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/font-awesome.min.css",
-    "inputFiles": [
-      "wwwroot/lib/font-awesome/css/font-awesome.min.css"
-    ],
-    "minify": {
-      "enabled": true,
-      "renameLocals": true
-    }
-  },
-  {
-    "outputFileName": "wwwroot/css/clean-blog.css",
-    "inputFiles": [
-      "wwwroot/lib/clean-blog/css/clean-blog.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/clean-blog.min.css",
-    "inputFiles": [
-      "wwwroot/lib/clean-blog/css/clean-blog.css"
-    ],
-    "minify": {
-      "enabled": true,
-      "renameLocals": true
-    }
-  },
-  {
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
       "wwwroot/js/site.js"
-    ],
-    "minify": {
-      "enabled": true,
-      "renameLocals": true
-    },
-    "sourceMap": false
-  },
-  {
-    "outputFileName": "wwwroot/js/hightlight.pack.js",
-    "inputFiles": [
-      "wwwroot/lib/highlight/build/highlight.pack.js"
-    ],
-    "sourceMap": false
-  },
-  {
-    "outputFileName": "wwwroot/js/hightlight.pack.min.js",
-    "inputFiles": [
-      "wwwroot/lib/highlight/build/highlight.pack.min.js"
-    ],
-    "minify": {
-      "enabled": true,
-      "renameLocals": true
-    },
-    "sourceMap": false
-  },
-  {
-    "outputFileName": "wwwroot/js/clean-blog.js",
-    "inputFiles": [
-      "wwwroot/lib/clean-blog/js/clean-blog.js"
-    ],
-    "sourceMap": false
-  },
-  {
-    "outputFileName": "wwwroot/js/clean-blog.min.js",
-    "inputFiles": [
-      "wwwroot/lib/clean-blog/js/clean-blog.js"
     ],
     "minify": {
       "enabled": true,

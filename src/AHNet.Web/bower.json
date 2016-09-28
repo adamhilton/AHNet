@@ -8,6 +8,7 @@
     "jquery-validation-unobtrusive": "3.2.6",
     "highlight": "9.7.0",
     "font-awesome": "4.6.3",
-    "clean-blog":  "1.0.1"
+    "clean-blog": "1.0.1",
+    "tinymce":  "4.4.3"
   }
 }
