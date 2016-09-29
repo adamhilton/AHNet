@@ -10,5 +10,17 @@ namespace AHNet.Web.Infrastructure.Data
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.
+                Entity<BlogPost>()
+                .HasIndex(b => b.Title)
+                .IsUnique();
+            
+            base.OnModelCreating(builder);
+        }
+
+        public DbSet<BlogPost> BlogPosts { get; set; }
     }
 }

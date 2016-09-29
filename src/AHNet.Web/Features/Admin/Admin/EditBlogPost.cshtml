@@ -1,0 +1,70 @@
+﻿@model AHNet.Web.Features.Admin.Admin.ViewModels.EditBlogPostViewModel
+
+@{
+    ViewBag.Title = $"edit - {Model.Title}";
+}
+
+<form asp-controller="Admin" asp-action="EditBlogPost">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input asp-for="OldTitle" type="hidden" />
+
+    <div class="form-group">
+        <label asp-for="Title" class="col-md-offset-2 col-md-10 control-label"></label>
+        <div class="col-md-offset-2 col-md-10 control-label">
+            <span asp-validation-for="Title" class="text-danger"></span>
+            <input asp-for="Title" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DatePublished" class="col-md-offset-2 col-md-10 control-label"></label>
+        <div class="col-md-offset-2 col-md-10 control-label">
+            <span asp-validation-for="DatePublished" class="text-danger"></span>
+            <input asp-for="DatePublished" type="date" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Body" class="col-md-offset-2 col-md-10 control-label"></label>
+        <div class="col-md-offset-2 col-md-10 control-label">
+            <span asp-validation-for="Body" class="text-danger"></span>
+            <textarea asp-for="Body" type="text" class="form-control"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IsPublished" class="col-md-offset-2 col-md-10 control-label"></label>
+        <div class="col-md-offset-2 col-md-10 control-label">
+            <span asp-validation-for="IsPublished" class="text-danger"></span>
+            <input asp-for="IsPublished" type="checkbox" class="form-checkbox">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-xs-2 control-label">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+
+        <div class="pull-right control-label">
+            <a asp-controller="Admin" asp-action="DeleteBlogPost" asp-route-name="@Model.Title.RemoveSpecialCharacters()" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+
+</form>
+
+@section Scripts{
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '#Body',
+            width: 700,
+            height: 300,
+            plugins: [
+              'codesample'
+            ],
+            content_css: 'css/content.css',
+            toolbar: 'insertfile undo redo codesample | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons '
+        });
+    </script>
+}

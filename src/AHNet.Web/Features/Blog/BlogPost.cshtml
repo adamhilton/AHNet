@@ -1,0 +1,13 @@
+﻿@model AHNet.Web.Features.Blog.ViewModels.BlogPostContentViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="text-center">
+    <h2>@Model.Title</h2>
+</div>
+
+<hr/>
+
+@Html.Raw(Model.Body)

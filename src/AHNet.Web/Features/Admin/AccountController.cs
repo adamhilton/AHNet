@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AHNet.Web.Core.Entities;
-using AHNet.Web.Features.Admin.Account;
+using AHNet.Web.Features.Admin.Account.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 
@@ -33,7 +33,7 @@ namespace AHNet.Web.Features.Admin
             if (ModelState.IsValid)
             {
                 var loginResult = await _signInManager.PasswordSignInAsync(
-                                            model.Username, model.Password, 
+                                            model.Username, model.Password,
                                             model.RememberMe, false);
                 if (loginResult.Succeeded)
                 {
@@ -51,7 +51,6 @@ namespace AHNet.Web.Features.Admin
             return View(model);
         }
 
-        [HttpPost]
         [Authorize]
         public async Task<IActionResult> Logout()
         {

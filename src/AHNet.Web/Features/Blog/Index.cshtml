@@ -1,6 +1,7 @@
+@model AHNet.Web.Features.Blog.ViewModels.BlogIndexViewModel
 
-<h1> Hello from the blog!!! </h1>
-<h1> Hello from the blog!!! </h1>
-<h1> Hello from the blog!!! </h1>
-<h1> Hello from the blog!!! </h1>
-<h1> Hello from the blog!!! </h1>
+@{
+    ViewBag.Title = "blog";
+}
+
+@Html.Partial("_BlogPosts", Model.BlogPosts)

@@ -15,6 +15,27 @@ namespace AHNet.Web.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431");
 
+            modelBuilder.Entity("AHNet.Web.Core.Entities.BlogPost", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Body");
+
+                    b.Property<DateTime>("DatePublished");
+
+                    b.Property<bool>("IsPublished");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
+
+                    b.ToTable("BlogPosts");
+                });
+
             modelBuilder.Entity("AHNet.Web.Core.Entities.User", b =>
                 {
                     b.Property<string>("Id");

@@ -1,14 +1,33 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AHNet.Web.Features.Blog.ViewModels;
+using AHNet.Web.Infrastructure.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AHNet.Web.Features.Home
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly BlogPostRepository _blogPostRepository;
+
+        public HomeController(BlogPostRepository blogPostRepository)
         {
-            return View();
+            _blogPostRepository = blogPostRepository;
         }
-        
+
+        public IActionResult Index(int? page)
+        {
+            var pageSize = 20;
+            var pageNumber = (page ?? 1);
+
+            var blogPosts = _blogPostRepository.ToPagedListOfPublishedBlogPosts(pageNumber, pageSize);
+
+            var model = new HomeIndexViewModel()
+            {
+                BlogPosts = blogPosts
+            };
+
+            return View(model);
+        }
+
         public IActionResult Error()
         {
             return View();

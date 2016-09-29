@@ -42,7 +42,12 @@
     "Microsoft.AspNet.Mvc.Abstractions": "6.0.0-rc1-final",
 
     "Serilog.Extensions.Logging": "1.2.0",
-    "Serilog.Sinks.ColoredConsole": "2.0.0"
+    "Serilog.Sinks.ColoredConsole": "2.0.0",
+
+    "Sakura.AspNetCore.PagedList": "2.0.1",
+    "Sakura.AspNetCore.Mvc.PagedList": "2.0.9",
+
+    "AutoMapper": "5.1.1"
   },
 
   "tools": {
@@ -95,7 +100,6 @@
   },
 
   "scripts": {
-    "precompile": [ "dotnet bundle" ],
     "prepublish": [ "bower install", "dotnet bundle" ],
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   },
