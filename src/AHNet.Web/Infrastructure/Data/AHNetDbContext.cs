@@ -17,10 +17,29 @@ namespace AHNet.Web.Infrastructure.Data
                 Entity<BlogPost>()
                 .HasIndex(b => b.Title)
                 .IsUnique();
-            
+
+            builder
+                .Entity<ContentTag>()
+                .HasIndex(b => b.Name)
+                .IsUnique();
+
+            builder.Entity<BlogPostContentTag>()
+                .HasKey(t => new { t.BlogPostId, t.ContentTagId });
+
+            builder.Entity<BlogPostContentTag>()
+                .HasOne(pt => pt.BlogPost)
+                .WithMany(p => p.BlogPostContentTags)
+                .HasForeignKey(pt => pt.BlogPostId);
+
+            builder.Entity<BlogPostContentTag>()
+                .HasOne(pt => pt.ContentTag)
+                .WithMany(t => t.BlogPostContentTags)
+                .HasForeignKey(pt => pt.ContentTagId);
+
             base.OnModelCreating(builder);
         }
 
         public DbSet<BlogPost> BlogPosts { get; set; }
+        public DbSet<ContentTag> ContentTags { get; set; }
     }
 }

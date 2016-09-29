@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace AHNet.Web.Core.Entities
 {
@@ -8,5 +9,8 @@ namespace AHNet.Web.Core.Entities
         public DateTime DatePublished { get; set; }
         public string Title { get; set; }
         public bool IsPublished { get; set; }
+
+        public List<BlogPostContentTag> BlogPostContentTags { get; set; }
+
     }
 }
