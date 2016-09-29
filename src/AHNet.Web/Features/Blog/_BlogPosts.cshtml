@@ -17,7 +17,9 @@
                 <a ahnet-blog-title="@item.UrlTitle">
                     <h3 class="blog-post-preview-title">@item.Title</h3>
                 </a>
-                <p class="blog-post-preview-info">@item.DatePublished.ToFormattedString()</p>
+                <p class="blog-post-preview-info">
+                    <i>@item.DatePublished.ToFormattedString()</i>
+                </p>
                 @Html.Raw(item.GetBlogPostSummary())
             </div>
         </div>
