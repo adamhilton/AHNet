@@ -18,6 +18,7 @@
                     <h3 class="blog-post-preview-title">@item.Title</h3>
                 </a>
                 <p class="blog-post-preview-info">
+                    <i class="fa fa-calendar"></i>
                     <i>@item.DatePublished.ToFormattedString()</i>
                 </p>
                 @Html.Raw(item.GetBlogPostSummary())

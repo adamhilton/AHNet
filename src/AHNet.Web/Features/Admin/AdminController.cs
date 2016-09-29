@@ -30,7 +30,7 @@ namespace AHNet.Web.Features.Admin
         [HttpGet]
         public IActionResult BlogPosts(int? page)
         {
-            var pageSize = 5;
+            const int pageSize = 25;
             var pageNumber = page ?? 1;
 
             var model = _blogPostRepository.ToPagedList(pageNumber, pageSize);

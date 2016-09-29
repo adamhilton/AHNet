@@ -75,6 +75,10 @@ pre code {
     margin-top: 5px;
 }
 
+.blog-posts-list {
+    margin-top: 10px;
+}
+
 .big-message {
     margin-top: 50px;
     margin-bottom: 50px;
@@ -116,4 +120,8 @@ p {
 #blog-posts-header {
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.social-button-list-items {
+    margin-top: 10px;
 }

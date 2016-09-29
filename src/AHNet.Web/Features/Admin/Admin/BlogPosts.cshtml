@@ -3,24 +3,31 @@
 @{
     ViewBag.Title = "blog posts";
 }
-<div id="blog-posts-header">
-        <a asp-controller="Admin" asp-action="CreateBlogPost" class="btn btn-info btn-md">Create blog post</a>
+
+<div id="blog-posts-header" class="pull-right">
+    <a asp-controller="Admin" asp-action="CreateBlogPost" class="btn btn-info btn-md">Create blog post</a>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-offset-2 col-sm-10 col-md-offset-4 col-md-8 ">
+        <pager />
+    </div>
 </div>
 
 <ul class="list-unstyled">
     @foreach (var item in Model)
     {
-        <li class="">
+        <li class="blog-posts-list">
             <a asp-controller="Admin" asp-action="EditBlogPost" asp-route-name="@item.UrlTitle">
                 <div class="row">
-                    <div class="col-md-6">
-                        <strong>@item.Title</strong>
+                    <div class="col-xs-12 col-sm-offset-2 col-sm-10 col-md-offset-4 col-md-8">
+                        <h3>@item.Title</h3>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-xs-12 col-sm-offset-2 col-sm-10 col-md-offset-4 col-md-8 blog-post-preview-info">
                         <i>
+                            <i class="fa fa-calendar"></i>
                             @item.DatePublished.ToFormattedString()
                             -
-                            <span class="@(item.IsPublished ? "" : "text-danger")">
+                            <span class="@(item.IsPublished ? "text-success" : "text-danger")">
                                 @(item.IsPublished ? "Published" : "Not Published")
                             </span>
                         </i>
@@ -31,4 +38,8 @@
     }
 </ul>
 
-<pager/>
+<div class="row">
+    <div class="col-xs-12 col-sm-offset-2 col-sm-10 col-md-offset-4 col-md-8 ">
+        <pager />
+    </div>
+</div>

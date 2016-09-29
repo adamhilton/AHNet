@@ -7,9 +7,16 @@
         {
             <li class="recent-posts-item">
                 <a ahnet-blog-title="@item.UrlTitle">
-                    @item.Title - @item.DatePublished.ToFormattedString()
+                    @item.Title
+
+                    <div class="blog-post-preview-info">
+                        <i>
+                            @item.DatePublished.ToFormattedString()
+                        </i>
+                    </div>
                 </a>
-            </li>
+                <hr/>
+        </li>
         }
     </ul>
 }
