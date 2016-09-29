@@ -9,6 +9,9 @@ namespace AHNet.Web.Features.Admin.Admin.ViewModels
         public string Title { get; set; }
 
         [Required]
+        public string OldTitle { get; set; }
+
+        [Required]
         public string Body { get; set; }
 
         [Required]

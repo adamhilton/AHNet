@@ -69,6 +69,7 @@ namespace AHNet.Web.Features.Admin
             }
 
             var model = _mapper.Map<EditBlogPostViewModel>(blogPost);
+            model.OldTitle = model.Title;
 
             return View(model);
         }
@@ -78,7 +79,7 @@ namespace AHNet.Web.Features.Admin
         {
             if (ModelState.IsValid)
             {
-                var blogPost = _blogPostRepository.GetByTitle(model.Title);
+                var blogPost = _blogPostRepository.GetByTitle(model.OldTitle);
 
                 blogPost.Title = model.Title;
                 blogPost.Body = model.Body;
