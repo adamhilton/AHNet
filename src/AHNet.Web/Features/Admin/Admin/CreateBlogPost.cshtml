@@ -36,7 +36,7 @@
         <label asp-for="IsPublished" class="col-md-offset-2 col-md-10 control-label"></label>
         <div class="col-md-offset-2 col-md-10 control-label">
             <span asp-validation-for="IsPublished" class="text-danger"></span>
-            <input asp-for="IsPublished" type="checkbox" class="form-control">
+            <input asp-for="IsPublished" type="checkbox" class="form-checkbox">
         </div>
     </div>
 
@@ -52,7 +52,7 @@
     <script type="text/javascript">
         tinymce.init({
             selector: '#Body',
-            width: 600,
+            width: 700,
             height: 300,
             plugins: [
               'codesample'

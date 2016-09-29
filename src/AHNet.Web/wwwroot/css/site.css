@@ -105,3 +105,14 @@ p {
 .no-padding {
     padding: 0;
 }
+
+.form-checkbox {
+    height: 30px;
+    width: 30px;
+    margin-bottom: 26px!important;
+}
+
+#blog-posts-header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

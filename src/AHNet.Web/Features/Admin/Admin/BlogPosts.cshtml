@@ -3,15 +3,29 @@
 @{
     ViewBag.Title = "blog posts";
 }
+<div id="blog-posts-header">
+        <a asp-controller="Admin" asp-action="CreateBlogPost" class="btn btn-info btn-md">Create blog post</a>
+</div>
 
-<a asp-controller="Admin" asp-action="CreateBlogPost">Create blog post</a>
-
-<ul>
+<ul class="list-unstyled">
     @foreach (var item in Model)
     {
-        <li>
+        <li class="">
             <a asp-controller="Admin" asp-action="EditBlogPost" asp-route-name="@item.UrlTitle">
-                @item.Title - @item.DatePublished.ToFormattedString()
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>@item.Title</strong>
+                    </div>
+                    <div class="col-md-6">
+                        <i>
+                            @item.DatePublished.ToFormattedString()
+                            -
+                            <span class="@(item.IsPublished ? "" : "text-danger")">
+                                @(item.IsPublished ? "Published" : "Not Published")
+                            </span>
+                        </i>
+                    </div>
+                </div>
             </a>
         </li>
     }

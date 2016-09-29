@@ -1,8 +1,5 @@
-using System.Linq;
-using System.Threading.Tasks;
 using AHNet.Web.Core.Entities;
 using AHNet.Web.Features.Admin.Admin.ViewModels;
-using AHNet.Web.Features.Blog.ViewModels;
 using AHNet.Web.Infrastructure.Data;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -33,8 +30,8 @@ namespace AHNet.Web.Features.Admin
         [HttpGet]
         public IActionResult BlogPosts(int? page)
         {
-            var pageSize = 20;
-            var pageNumber = (page ?? 1);
+            var pageSize = 5;
+            var pageNumber = page ?? 1;
 
             var model = _blogPostRepository.ToPagedList(pageNumber, pageSize);
 
@@ -90,6 +87,20 @@ namespace AHNet.Web.Features.Admin
 
                 _blogPostRepository.Update(blogPost);
             }
+
+            return RedirectToAction("BlogPosts");
+        }
+
+        public IActionResult DeleteBlogPost(string name)
+        {
+            var blogPost = _blogPostRepository.GetByTitle(name);
+
+            if (blogPost == null)
+            {
+                return NotFound();
+            }
+
+            _blogPostRepository.Delete(blogPost);
 
             return RedirectToAction("BlogPosts");
         }
