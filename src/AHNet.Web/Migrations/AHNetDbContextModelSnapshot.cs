@@ -8,10 +8,9 @@ using AHNet.Web.Infrastructure.Data;
 namespace AHNet.Web.Migrations
 {
     [DbContext(typeof(AHNetDbContext))]
-    [Migration("20160922005015_initial")]
-    partial class initial
+    partial class AHNetDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431");
@@ -25,11 +24,46 @@ namespace AHNet.Web.Migrations
 
                     b.Property<DateTime>("DatePublished");
 
+                    b.Property<bool>("IsPublished");
+
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Title")
+                        .IsUnique();
+
                     b.ToTable("BlogPosts");
+                });
+
+            modelBuilder.Entity("AHNet.Web.Core.Entities.BlogPostContentTag", b =>
+                {
+                    b.Property<int>("BlogPostId");
+
+                    b.Property<int>("ContentTagId");
+
+                    b.HasKey("BlogPostId", "ContentTagId");
+
+                    b.HasIndex("BlogPostId");
+
+                    b.HasIndex("ContentTagId");
+
+                    b.ToTable("BlogPostsContentTags");
+                });
+
+            modelBuilder.Entity("AHNet.Web.Core.Entities.ContentTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("ContentTags");
                 });
 
             modelBuilder.Entity("AHNet.Web.Core.Entities.User", b =>
@@ -186,6 +220,19 @@ namespace AHNet.Web.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("AHNet.Web.Core.Entities.BlogPostContentTag", b =>
+                {
+                    b.HasOne("AHNet.Web.Core.Entities.BlogPost", "BlogPost")
+                        .WithMany("BlogPostsContentTags")
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AHNet.Web.Core.Entities.ContentTag", "ContentTag")
+                        .WithMany("BlogPostsContentTags")
+                        .HasForeignKey("ContentTagId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

@@ -65,6 +65,8 @@ namespace AHNet.Web
 
             services.AddScoped<BlogPostRepository>();
 
+            services.AddScoped<ContentTagRepository>();
+
             services.AddSingleton<IMapper>(sp => _mapperConfiguration.CreateMapper());
 
             services.AddBootstrapPagerGenerator(options =>

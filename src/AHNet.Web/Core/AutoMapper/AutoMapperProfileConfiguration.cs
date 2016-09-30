@@ -14,6 +14,7 @@ namespace AHNet.Web.Core.AutoMapper
             CreateMap<CreateBlogPostViewModel, BlogPost>();
             CreateMap<EditBlogPostViewModel, BlogPost>();
             CreateMap<BlogPost, EditBlogPostViewModel>();
+            CreateMap<CreateContentTagViewModel, ContentTag>();
         }
     }
 }

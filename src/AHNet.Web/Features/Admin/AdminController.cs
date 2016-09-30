@@ -1,9 +1,12 @@
+using System.Linq;
 using AHNet.Web.Core.Entities;
+using AHNet.Web.Core.Extensions;
 using AHNet.Web.Features.Admin.Admin.ViewModels;
 using AHNet.Web.Infrastructure.Data;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AHNet.Web.Features.Admin
 {
@@ -11,14 +14,17 @@ namespace AHNet.Web.Features.Admin
     public class AdminController : Controller
     {
         private readonly BlogPostRepository _blogPostRepository;
+        private readonly ContentTagRepository _contentTagRepository;
         private readonly IMapper _mapper;
 
         public AdminController(
             IMapper mapper,
-            BlogPostRepository blogPostRepository)
+            BlogPostRepository blogPostRepository,
+            ContentTagRepository contentTagRepository)
         {
             _mapper = mapper;
             _blogPostRepository = blogPostRepository;
+            _contentTagRepository = contentTagRepository;
         }
 
         [HttpGet]
@@ -42,6 +48,7 @@ namespace AHNet.Web.Features.Admin
         public IActionResult CreateBlogPost()
         {
             var model = new CreateBlogPostViewModel();
+            model.ContentTags = _contentTagRepository.List();
             return View(model);
         }
 
@@ -51,7 +58,19 @@ namespace AHNet.Web.Features.Admin
             if (ModelState.IsValid)
             {
                 var blogPost = _mapper.Map<BlogPost>(model);
+
                 _blogPostRepository.Add(blogPost);
+
+                foreach (var tag in model.ContentTags)
+                {
+                    blogPost.BlogPostsContentTags.Add(new BlogPostContentTag
+                    {
+                        BlogPost = blogPost,
+                        ContentTag = tag
+                    });
+                }
+
+                _blogPostRepository.Update(blogPost);
 
                 return RedirectToAction("BlogPosts");
             }
@@ -70,6 +89,9 @@ namespace AHNet.Web.Features.Admin
 
             var model = _mapper.Map<EditBlogPostViewModel>(blogPost);
             model.OldTitle = model.Title;
+            model.AvailableContentTags = _contentTagRepository.List();
+            model.SelectedContentTags =
+                _blogPostRepository.GetContentTagsByBlogPostTitle(model.Title);
 
             return View(model);
         }
@@ -104,6 +126,36 @@ namespace AHNet.Web.Features.Admin
             _blogPostRepository.Delete(blogPost);
 
             return RedirectToAction("BlogPosts");
+        }
+
+        public IActionResult ContentTags(int? page)
+        {
+            const int pageSize = 25;
+            var pageNumber = page ?? 1;
+
+            var model = _contentTagRepository.ToPagedList(pageNumber, pageSize);
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult CreateContentTag()
+        {
+            var model = new CreateContentTagViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult CreateContentTag(CreateContentTagViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var contentTag = _mapper.Map<ContentTag>(model);
+                _contentTagRepository.Add(contentTag);
+
+                return RedirectToAction("ContentTags");
+            }
+            return View(model);
         }
     }
 }

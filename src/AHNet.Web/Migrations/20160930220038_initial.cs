@@ -16,11 +16,25 @@ namespace AHNet.Web.Migrations
                         .Annotation("Npgsql:ValueGeneratedOnAdd", true),
                     Body = table.Column<string>(nullable: true),
                     DatePublished = table.Column<DateTime>(nullable: false),
+                    IsPublished = table.Column<bool>(nullable: false),
                     Title = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BlogPosts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ContentTags",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGeneratedOnAdd", true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContentTags", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,6 +88,30 @@ namespace AHNet.Web.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BlogPostsContentTags",
+                columns: table => new
+                {
+                    BlogPostId = table.Column<int>(nullable: false),
+                    ContentTagId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BlogPostsContentTags", x => new { x.BlogPostId, x.ContentTagId });
+                    table.ForeignKey(
+                        name: "FK_BlogPostsContentTags_BlogPosts_BlogPostId",
+                        column: x => x.BlogPostId,
+                        principalTable: "BlogPosts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BlogPostsContentTags_ContentTags_ContentTagId",
+                        column: x => x.ContentTagId,
+                        principalTable: "ContentTags",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -163,6 +201,28 @@ namespace AHNet.Web.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_BlogPosts_Title",
+                table: "BlogPosts",
+                column: "Title",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BlogPostsContentTags_BlogPostId",
+                table: "BlogPostsContentTags",
+                column: "BlogPostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BlogPostsContentTags_ContentTagId",
+                table: "BlogPostsContentTags",
+                column: "ContentTagId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ContentTags_Name",
+                table: "ContentTags",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
@@ -207,7 +267,7 @@ namespace AHNet.Web.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BlogPosts");
+                name: "BlogPostsContentTags");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -223,6 +283,12 @@ namespace AHNet.Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "BlogPosts");
+
+            migrationBuilder.DropTable(
+                name: "ContentTags");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -28,12 +28,12 @@ namespace AHNet.Web.Infrastructure.Data
 
             builder.Entity<BlogPostContentTag>()
                 .HasOne(pt => pt.BlogPost)
-                .WithMany(p => p.BlogPostContentTags)
+                .WithMany(p => p.BlogPostsContentTags)
                 .HasForeignKey(pt => pt.BlogPostId);
 
             builder.Entity<BlogPostContentTag>()
                 .HasOne(pt => pt.ContentTag)
-                .WithMany(t => t.BlogPostContentTags)
+                .WithMany(t => t.BlogPostsContentTags)
                 .HasForeignKey(pt => pt.ContentTagId);
 
             base.OnModelCreating(builder);
@@ -41,5 +41,6 @@ namespace AHNet.Web.Infrastructure.Data
 
         public DbSet<BlogPost> BlogPosts { get; set; }
         public DbSet<ContentTag> ContentTags { get; set; }
+        public DbSet<BlogPostContentTag> BlogPostsContentTags { get; set; }
     }
 }

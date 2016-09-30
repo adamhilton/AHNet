@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using AHNet.Web.Core.Entities;
 
 namespace AHNet.Web.Features.Admin.Admin.ViewModels
 {
@@ -18,5 +20,8 @@ namespace AHNet.Web.Features.Admin.Admin.ViewModels
         [Required]
         [Display(Name = "Published")]
         public bool IsPublished { get; set; } = false;
+
+        [Display(Name = "Tags")]
+        public ICollection<ContentTag> ContentTags { get; set; }
     }
 }

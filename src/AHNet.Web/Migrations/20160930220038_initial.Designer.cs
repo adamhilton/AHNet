@@ -8,8 +8,8 @@ using AHNet.Web.Infrastructure.Data;
 namespace AHNet.Web.Migrations
 {
     [DbContext(typeof(AHNetDbContext))]
-    [Migration("20160924211240_blog-post-title-unique-index")]
-    partial class blogposttitleuniqueindex
+    [Migration("20160930220038_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,6 +25,8 @@ namespace AHNet.Web.Migrations
 
                     b.Property<DateTime>("DatePublished");
 
+                    b.Property<bool>("IsPublished");
+
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
@@ -33,6 +35,36 @@ namespace AHNet.Web.Migrations
                         .IsUnique();
 
                     b.ToTable("BlogPosts");
+                });
+
+            modelBuilder.Entity("AHNet.Web.Core.Entities.BlogPostContentTag", b =>
+                {
+                    b.Property<int>("BlogPostId");
+
+                    b.Property<int>("ContentTagId");
+
+                    b.HasKey("BlogPostId", "ContentTagId");
+
+                    b.HasIndex("BlogPostId");
+
+                    b.HasIndex("ContentTagId");
+
+                    b.ToTable("BlogPostsContentTags");
+                });
+
+            modelBuilder.Entity("AHNet.Web.Core.Entities.ContentTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("ContentTags");
                 });
 
             modelBuilder.Entity("AHNet.Web.Core.Entities.User", b =>
@@ -189,6 +221,19 @@ namespace AHNet.Web.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("AHNet.Web.Core.Entities.BlogPostContentTag", b =>
+                {
+                    b.HasOne("AHNet.Web.Core.Entities.BlogPost", "BlogPost")
+                        .WithMany("BlogPostsContentTags")
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AHNet.Web.Core.Entities.ContentTag", "ContentTag")
+                        .WithMany("BlogPostsContentTags")
+                        .HasForeignKey("ContentTagId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

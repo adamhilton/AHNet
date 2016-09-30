@@ -55,5 +55,13 @@ namespace AHNet.Web.Infrastructure.Data
                 .OrderByDescending(o => o.DatePublished)
                 .ToPagedList(pageSize, pageNumber);
         }
+
+        public List<ContentTag> GetContentTagsByBlogPostTitle(string title)
+        {
+            return _dbContext.BlogPostsContentTags.Include(i => i.ContentTag)
+                .Where(w => string.Equals(w.BlogPost.Title.RemoveSpecialCharacters(), title.RemoveSpecialCharacters(), StringComparison.CurrentCultureIgnoreCase))
+                .Select(s => s.ContentTag)
+                .ToList();
+        }
     }
 }
