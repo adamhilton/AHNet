@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using AHNet.Web.Core.Entities;
 using AHNet.Web.Core.Extensions;
@@ -47,8 +48,10 @@ namespace AHNet.Web.Features.Admin
         [HttpGet]
         public IActionResult CreateBlogPost()
         {
-            var model = new CreateBlogPostViewModel();
-            model.ContentTags = _contentTagRepository.List();
+            var model = new CreateBlogPostViewModel
+            {
+                ContentTags = _contentTagRepository.List().Select(s => s.Name).ToList()
+            };
             return View(model);
         }
 
@@ -63,11 +66,16 @@ namespace AHNet.Web.Features.Admin
 
                 foreach (var tag in model.ContentTags)
                 {
-                    blogPost.BlogPostsContentTags.Add(new BlogPostContentTag
+                    var contentTag = _contentTagRepository.GetByName(tag);
+                    var blogtag = new BlogPostContentTag
                     {
                         BlogPost = blogPost,
-                        ContentTag = tag
-                    });
+                        ContentTag = contentTag,
+                        BlogPostId = blogPost.Id,
+                        ContentTagId = contentTag.Id
+                    };
+
+                    blogPost.BlogPostsContentTags.Add(blogtag);
                 }
 
                 _blogPostRepository.Update(blogPost);

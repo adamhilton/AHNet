@@ -25,6 +25,7 @@ namespace AHNet.Web.Features.Admin.Admin.ViewModels
 
         public ICollection<ContentTag> SelectedContentTags { get; set; }
 
+        [Display(Name = "Tags")]
         public ICollection<ContentTag> AvailableContentTags { get; set; }
     }
 }

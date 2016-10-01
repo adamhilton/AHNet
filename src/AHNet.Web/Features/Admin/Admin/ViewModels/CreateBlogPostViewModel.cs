@@ -22,6 +22,11 @@ namespace AHNet.Web.Features.Admin.Admin.ViewModels
         public bool IsPublished { get; set; } = false;
 
         [Display(Name = "Tags")]
-        public ICollection<ContentTag> ContentTags { get; set; }
+        public List<string> ContentTags { get; set; }
+
+        public CreateBlogPostViewModel()
+        {
+            ContentTags = new List<string>();
+        }
     }
 }

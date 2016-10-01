@@ -27,5 +27,10 @@ namespace AHNet.Web.Infrastructure.Data
                 .Select(s => s.BlogPost)
                 .ToList();
         }
+
+        public ContentTag GetByName(string tag)
+        {
+            return _dbSet.FirstOrDefault(w => string.Equals(w.Name, tag, StringComparison.CurrentCultureIgnoreCase));
+        }
     }
 }

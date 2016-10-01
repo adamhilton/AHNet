@@ -46,7 +46,7 @@
             <span asp-validation-for="ContentTags" class="text-danger"></span>
             @foreach (var tag in Model.ContentTags)
             {
-                <input type="checkbox" name="ContentTags" value="@tag"> @tag.Name
+                <input type="checkbox" name="ContentTags" value="@tag"> @tag
             }
         </div>
     </div>
