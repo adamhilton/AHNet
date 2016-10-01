@@ -1,4 +1,4 @@
-@model Sakura.AspNetCore.IPagedList<BlogPost>
+@model IEnumerable<BlogPostWithContentTagsViewModel>
 
 @{
     ViewBag.Title = "blog posts";
@@ -17,20 +17,31 @@
     @foreach (var item in Model)
     {
         <li class="blog-posts-list">
-            <a asp-controller="Admin" asp-action="EditBlogPost" asp-route-name="@item.Title.RemoveSpecialCharacters()">
+            <a asp-controller="Admin" asp-action="EditBlogPost" asp-route-name="@item.BlogPost.Title.RemoveSpecialCharacters()">
                 <div class="row">
                     <div class="col-xs-12 col-sm-offset-2 col-sm-10 col-md-offset-4 col-md-8">
-                        <h3>@item.Title</h3>
+                        <h3>@item.BlogPost.Title</h3>
                     </div>
                     <div class="col-xs-12 col-sm-offset-2 col-sm-10 col-md-offset-4 col-md-8 blog-post-preview-info">
                         <i>
                             <i class="fa fa-calendar"></i>
-                            @item.DatePublished.ToFormattedString()
+                            @item.BlogPost.DatePublished.ToFormattedString()
                             -
-                            <span class="@(item.IsPublished ? "text-success" : "text-danger")">
-                                @(item.IsPublished ? "Published" : "Not Published")
+                            <span class="@(item.BlogPost.IsPublished ? "text-success" : "text-danger")">
+                                @(item.BlogPost.IsPublished ? "Published" : "Not Published")
                             </span>
                         </i>
+                        @if (item.ContentTags.Count > 0)
+                        {
+                            <p>
+
+                                <i class="fa fa-tag"></i>
+                                @foreach (var tag in item.ContentTags)
+                                {
+                                    <span>@tag.Name </span>
+                                }
+                            </p>
+                        }
                     </div>
                 </div>
             </a>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AHNet.Web.Core.Entities;
 using AHNet.Web.Core.Exceptions;
 using AHNet.Web.Core.Extensions;
+using AHNet.Web.Features.Shared.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Sakura.AspNetCore;
 
@@ -48,19 +49,49 @@ namespace AHNet.Web.Infrastructure.Data
             return _dbSet.OrderByDescending(o => o.DatePublished).ToPagedList(pageSize, pageNumber);
         }
 
-        public IPagedList<BlogPost> ToPagedListOfPublishedBlogPosts(int pageNumber, int pageSize)
+        public IPagedList<BlogPostWithContentTagsViewModel> ToPagedListWithContentTags(int pageNumber, int pageSize)
+        {
+            return _dbSet
+                .Include(i => i.BlogPostsContentTags)
+                .OrderByDescending(o => o.DatePublished)
+                .Select(post => new BlogPostWithContentTagsViewModel()
+                {
+                    BlogPost = post,
+                    ContentTags =
+                        _dbContext.BlogPostsContentTags
+                        .Where(w => w.BlogPostId == post.Id)
+                        .Select(s => s.ContentTag)
+                        .ToList()
+                })
+                .ToPagedList(pageSize, pageNumber);
+        }
+
+        public IPagedList<BlogPostWithContentTagsViewModel> ToPagedListOfPublishedBlogPosts(int pageNumber, int pageSize)
         {
             return _dbSet
                 .Where(w => w.IsPublished)
+                .Include(i => i.BlogPostsContentTags)
                 .OrderByDescending(o => o.DatePublished)
+                .Select(post => new BlogPostWithContentTagsViewModel()
+                {
+                    BlogPost = post,
+                    ContentTags =
+                        _dbContext.BlogPostsContentTags
+                        .Where(w => w.BlogPostId == post.Id)
+                        .Select(s => s.ContentTag)
+                        .ToList()
+                })
                 .ToPagedList(pageSize, pageNumber);
         }
 
         public List<ContentTag> GetContentTagsByBlogPostTitle(string title)
         {
-            return _dbContext.BlogPostsContentTags.Include(i => i.ContentTag)
-                .Where(w => string.Equals(w.BlogPost.Title.RemoveSpecialCharacters(), title.RemoveSpecialCharacters(), StringComparison.CurrentCultureIgnoreCase))
-                .Select(s => s.ContentTag)
+            return _dbContext.BlogPostsContentTags
+                .Include(i => i.ContentTag)
+                .Where(w => string.Equals(
+                        w.BlogPost.Title, title, StringComparison.CurrentCulture
+                    )
+                ).Select(s => s.ContentTag)
                 .ToList();
         }
 

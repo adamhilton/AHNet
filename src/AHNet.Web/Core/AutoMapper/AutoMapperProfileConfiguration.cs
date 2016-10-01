@@ -2,6 +2,7 @@
 using AHNet.Web.Features.Admin.Admin.ViewModels;
 using AHNet.Web.Features.Blog.ViewModels;
 using AutoMapper;
+using Sakura.AspNetCore;
 
 namespace AHNet.Web.Core.AutoMapper
 {

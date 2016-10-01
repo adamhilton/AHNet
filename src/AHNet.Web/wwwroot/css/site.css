@@ -102,6 +102,10 @@ pre code {
     color: #808080;
 }
 
+.blog-post-preview-info p {
+    margin: 0;
+}
+
 p {
     margin-top: 15px;
     margin-bottom: 15px;

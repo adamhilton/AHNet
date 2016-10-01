@@ -1,13 +1,10 @@
-using System.Collections.Generic;
 using System.Linq;
 using AHNet.Web.Core.Entities;
-using AHNet.Web.Core.Extensions;
 using AHNet.Web.Features.Admin.Admin.ViewModels;
 using AHNet.Web.Infrastructure.Data;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AHNet.Web.Features.Admin
 {
@@ -40,7 +37,7 @@ namespace AHNet.Web.Features.Admin
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            var model = _blogPostRepository.ToPagedList(pageNumber, pageSize);
+            var model = _blogPostRepository.ToPagedListWithContentTags(pageNumber, pageSize);
 
             return View(model);
         }
