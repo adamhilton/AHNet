@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using AHNet.Web.Core.Entities;
 
 namespace AHNet.Web.Features.Admin.Admin.ViewModels
 {

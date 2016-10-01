@@ -1,5 +1,4 @@
-﻿using AHNet.Web.Features.Blog.ViewModels;
-using AHNet.Web.Infrastructure.Data;
+﻿using AHNet.Web.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AHNet.Web.Features.Home
