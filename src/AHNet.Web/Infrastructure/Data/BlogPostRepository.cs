@@ -63,5 +63,15 @@ namespace AHNet.Web.Infrastructure.Data
                 .Select(s => s.ContentTag)
                 .ToList();
         }
+
+        public void ClearContentTags(int id)
+        {
+            var tagsToRemove = _dbContext.BlogPostsContentTags.Where(w => w.BlogPostId.Equals(id));
+            foreach (var tag in tagsToRemove)
+            {
+                _dbContext.BlogPostsContentTags.Remove(tag);
+            }
+            _dbContext.SaveChanges();
+        }
     }
 }

@@ -23,8 +23,9 @@ namespace AHNet.Web.Features.Admin.Admin.ViewModels
         [Required]
         public bool IsPublished { get; set; }
 
-        public ICollection<ContentTag> SelectedContentTags { get; set; }
+        public List<string> SelectedContentTags { get; set; } = new List<string>();
 
-        public ICollection<ContentTag> AvailableContentTags { get; set; }
+        [Display(Name = "Tags")]
+        public List<string> AvailableContentTags { get; set; } = new List<string>();
     }
 }

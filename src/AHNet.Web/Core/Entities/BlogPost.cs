@@ -10,7 +10,7 @@ namespace AHNet.Web.Core.Entities
         public string Title { get; set; }
         public bool IsPublished { get; set; }
 
-        public ICollection<BlogPostContentTag> BlogPostsContentTags { get; set; }
+        public ICollection<BlogPostContentTag> BlogPostsContentTags { get; set; } = new HashSet<BlogPostContentTag>();
 
     }
 }

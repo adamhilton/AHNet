@@ -1,5 +1,6 @@
 ﻿@using System
 @using System.Linq
+@using System.Threading.Tasks
 @model AHNet.Web.Features.Admin.Admin.ViewModels.EditBlogPostViewModel
 
 @{
@@ -50,8 +51,8 @@
             <span asp-validation-for="AvailableContentTags" class="text-danger"></span>
             @foreach (var tag in Model.AvailableContentTags)
             {
-                var tagIsSelected = Model.SelectedContentTags.Any(a => string.Equals(a.Name, tag.Name, StringComparison.CurrentCultureIgnoreCase));
-                <input type="checkbox" name="ContentTags" checked="@tagIsSelected" value="@tag"> @tag.Name
+                var tagIsSelected = Model.SelectedContentTags.Any(a => string.Equals(a, tag, StringComparison.CurrentCultureIgnoreCase));
+                <input type="checkbox" name="AvailableContentTags" checked="@tagIsSelected" value="@tag"> @tag
             }
         </div>
     </div>

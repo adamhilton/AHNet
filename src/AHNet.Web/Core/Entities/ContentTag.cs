@@ -7,7 +7,7 @@ namespace AHNet.Web.Core.Entities
     {
         public string Name { get; set; }
 
-        public ICollection<BlogPostContentTag> BlogPostsContentTags { get; set; }
+        public ICollection<BlogPostContentTag> BlogPostsContentTags { get; set; } = new List<BlogPostContentTag>();
 
     }
 }
