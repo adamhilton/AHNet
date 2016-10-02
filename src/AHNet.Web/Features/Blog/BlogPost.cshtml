@@ -7,7 +7,18 @@
 <div class="text-center">
     <h2>@Model.Title</h2>
     <div class="blog-post-info">
+        <i class="fa fa-calendar"></i>
         <i>@Model.DatePublished.ToFormattedString()</i>
+        @if(Model.ContentTags.Count > 0)
+        {
+            <p>
+                <i class="fa fa-tag"></i>
+                @foreach(var tag in Model.ContentTags)
+                {
+                    <span>@tag.Name </span>
+                }
+            </p>
+        }
     </div>
 </div>
 

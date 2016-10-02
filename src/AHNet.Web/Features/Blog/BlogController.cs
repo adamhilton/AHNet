@@ -49,6 +49,7 @@ namespace AHNet.Web.Features.Blog
                 }
 
                 model = _mapper.Map<BlogPostContentViewModel>(blogPost);
+                model.ContentTags = _blogPostRepository.GetContentTagsByBlogPostTitle(model.Title);
             }
             catch (BlogPostNotFoundException)
             {

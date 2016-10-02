@@ -102,7 +102,7 @@ pre code {
     color: #808080;
 }
 
-.blog-post-preview-info p {
+.blog-post-preview-info p, .blog-post-info p {
     margin: 0;
 }
 
