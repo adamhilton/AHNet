@@ -1,1 +1,5 @@
-wwwroot/lib/
+wwwroot/lib/*
+!wwwroot/lib/font-awesome
+
+wwwroot/lib/font-awesome/*
+!wwwroot/lib/font-awesome/fonts
