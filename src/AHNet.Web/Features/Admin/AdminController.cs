@@ -179,5 +179,43 @@ namespace AHNet.Web.Features.Admin
             }
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult EditContentTag(string name)
+        {
+            var tag = _contentTagRepository.GetByName(name);
+            var model = _mapper.Map<EditContentTagViewModel>(tag);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditContentTag(EditContentTagViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var tag = _contentTagRepository.GetById(model.Id);
+                tag.Name = model.Name;
+
+                _contentTagRepository.Update(tag);
+
+                return RedirectToAction("ContentTags");
+            }
+
+            return View(model);
+        }
+
+        public IActionResult DeleteContentTag(string name)
+        {
+            var tag = _contentTagRepository.GetByName(name);
+
+            if(tag == null)
+            {
+                return NotFound();
+            }
+
+            _contentTagRepository.Delete(tag);
+
+            return RedirectToAction("ContentTags");
+        }
     }
 }

@@ -19,9 +19,10 @@
         <li class="blog-posts-list">
             <div class="row">
                 <div class="col-xs-12 col-sm-offset-2 col-sm-10 col-md-offset-4 col-md-8">
-                    <h3>@item.Name</h3>
+                    <a asp-controller="Admin" asp-action="EditContentTag" asp-route-name="@item.Name">
+                        <h3>@item.Name</h3>
+                    </a>
                 </div>
-
             </div>
     </li>
     }
