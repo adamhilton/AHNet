@@ -7,7 +7,7 @@
     ViewBag.Title = $"edit - {Model.Title}";
 }
 
-<form asp-controller="Admin" asp-action="EditBlogPost">
+<form asp-controller="admin" asp-action="editblogpost">
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -63,7 +63,7 @@
         </div>
 
         <div class="pull-right control-label">
-            <a asp-controller="Admin" asp-action="DeleteBlogPost" asp-route-name="@Model.Title.RemoveSpecialCharacters()" class="btn btn-danger">Delete</a>
+            <a asp-controller="admin" asp-action="deleteblogpost" asp-route-name="@Model.Title.RemoveSpecialCharacters()" class="btn btn-danger">Delete</a>
         </div>
     </div>
 

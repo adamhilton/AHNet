@@ -5,7 +5,7 @@
 }
 
 <div id="blog-posts-header" class="pull-right">
-    <a asp-controller="Admin" asp-action="CreateBlogPost" class="btn btn-info btn-md">Create blog post</a>
+    <a asp-controller="admin" asp-action="createblogpost" class="btn btn-info btn-md">Create blog post</a>
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-offset-2 col-sm-10 col-md-offset-4 col-md-8 ">
@@ -17,7 +17,7 @@
     @foreach (var item in Model)
     {
         <li class="blog-posts-list">
-            <a asp-controller="Admin" asp-action="EditBlogPost" asp-route-name="@item.BlogPost.Title.RemoveSpecialCharacters()">
+            <a asp-controller="admin" asp-action="editblogpost" asp-route-name="@item.BlogPost.Title.RemoveSpecialCharacters()">
                 <div class="row">
                     <div class="col-xs-12 col-sm-offset-2 col-sm-10 col-md-offset-4 col-md-8">
                         <h3>@item.BlogPost.Title</h3>

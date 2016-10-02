@@ -4,7 +4,7 @@
     ViewBag.Title = $"edit - {Model.Name} tag";
 }
 
-<form asp-controller="Admin" asp-action="EditContentTag">
+<form asp-controller="admin" asp-action="editcontenttag">
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -24,7 +24,7 @@
         </div>
 
         <div class="pull-right control-label">
-            <a asp-controller="Admin" asp-action="DeleteContentTag" asp-route-name="@Model.Name" class="btn btn-danger">Delete</a>
+            <a asp-controller="admin" asp-action="deletecontenttag" asp-route-name="@Model.Name" class="btn btn-danger">Delete</a>
         </div>
     </div>
 

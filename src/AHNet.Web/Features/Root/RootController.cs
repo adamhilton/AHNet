@@ -8,7 +8,7 @@ namespace AHNet.Web.Features.Root
     public class RootController : Controller
     {
 
-        [HttpGet("Error/{code:int}")]
+        [HttpGet("error/{code:int}")]
         public IActionResult Error(int errorCode)
         {
         if (Response.StatusCode == (int)HttpStatusCode.NotFound ||

@@ -35,7 +35,7 @@ namespace AHNet.Web.Features.Blog
             return View(model);
         }
 
-        [HttpGet("/Blog/{blogPostTitle}")]
+        [HttpGet("/blog/{blogPostTitle}")]
         public IActionResult BlogPost(string blogPostTitle)
         {
             BlogPostContentViewModel model;

@@ -43,7 +43,7 @@ namespace AHNet.Web.Features.Admin
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Admin");
+                        return RedirectToAction("index", "admin");
                     }
                 }
             }
@@ -55,7 +55,7 @@ namespace AHNet.Web.Features.Admin
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("login", "account");
         }
 
     }

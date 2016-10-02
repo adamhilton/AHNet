@@ -77,7 +77,7 @@ namespace AHNet.Web.Features.Admin
 
                 _blogPostRepository.Update(blogPost);
 
-                return RedirectToAction("BlogPosts");
+                return RedirectToAction("blogposts");
             }
             return View(model);
         }
@@ -133,7 +133,7 @@ namespace AHNet.Web.Features.Admin
                 _blogPostRepository.Update(blogPost);
             }
 
-            return RedirectToAction("BlogPosts");
+            return RedirectToAction("blogposts");
         }
 
         public IActionResult DeleteBlogPost(string name)
@@ -147,7 +147,7 @@ namespace AHNet.Web.Features.Admin
 
             _blogPostRepository.Delete(blogPost);
 
-            return RedirectToAction("BlogPosts");
+            return RedirectToAction("blogposts");
         }
 
         public IActionResult ValidateBlogPostTitle(string title)
@@ -181,7 +181,7 @@ namespace AHNet.Web.Features.Admin
                 var contentTag = _mapper.Map<ContentTag>(model);
                 _contentTagRepository.Add(contentTag);
 
-                return RedirectToAction("ContentTags");
+                return RedirectToAction("contenttags");
             }
             return View(model);
         }
@@ -204,7 +204,7 @@ namespace AHNet.Web.Features.Admin
 
                 _contentTagRepository.Update(tag);
 
-                return RedirectToAction("ContentTags");
+                return RedirectToAction("contenttags");
             }
 
             return View(model);
@@ -221,7 +221,7 @@ namespace AHNet.Web.Features.Admin
 
             _contentTagRepository.Delete(tag);
 
-            return RedirectToAction("ContentTags");
+            return RedirectToAction("contenttags");
         }
 
         public IActionResult ValidateContentTagName(string name)

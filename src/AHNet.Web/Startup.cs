@@ -59,6 +59,11 @@ namespace AHNet.Web
 
             services.AddMvcWithFeatureRouting();
 
+            services.AddRouting( options => {
+                options.LowercaseUrls = true;
+                options.AppendTrailingSlash = true;
+            });
+
             services.AddSingleton(_ => Configuration);
 
             services.AddTransient<SeedData>();
@@ -79,8 +84,6 @@ namespace AHNet.Web
 
         }
 
-
-
         public async void Configure(IApplicationBuilder app,
                         IHostingEnvironment env,
                         ILoggerFactory loggerFactory,
@@ -98,10 +101,10 @@ namespace AHNet.Web
             else
             {
                 loggerFactory.AddConsole(LogLevel.Error);
-                app.UseExceptionHandler("/Error/{0}");
+                app.UseExceptionHandler("/error/{0}");
             }
 
-            app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            app.UseStatusCodePagesWithReExecute("/error/{0}");
 
             app.UseStaticFiles();
 
@@ -119,7 +122,7 @@ namespace AHNet.Web
             return new CookieAuthenticationOptions()
             {
                 AuthenticationScheme = "Cookie",
-                LoginPath = new PathString("/Account/Login"),
+                LoginPath = new PathString("/account/login"),
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true
             };
@@ -129,7 +132,7 @@ namespace AHNet.Web
         {
             routeBuilder.MapRoute(
                 name: "default",
-                template: "{controller=Home}/{action=Index}/{id?}");
+                template: "{controller=home}/{action=index}/{id?}");
         }
     }
 

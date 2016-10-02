@@ -6,7 +6,7 @@ namespace AHNet.Web.Core.TagHelpers
     public class BlogPostTagHelper : TagHelper
     {
         private const string BlogTitleAttributeName = "ahnet-blog-title";
-        private const string BlogControllerName = "Blog";
+        private const string BlogControllerName = "blog";
 
         [HtmlAttributeName(BlogTitleAttributeName)]
         public string BlogTitle { get; set; }
