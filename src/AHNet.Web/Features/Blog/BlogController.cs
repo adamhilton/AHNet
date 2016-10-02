@@ -22,7 +22,7 @@ namespace AHNet.Web.Features.Blog
         [HttpGet]
         public IActionResult Index(int? page)
         {
-            var pageSize = 20;
+            const int pageSize = 20;
             var pageNumber = (page ?? 1);
 
             var blogPosts = _blogPostRepository.ToPagedListOfPublishedBlogPosts(pageNumber, pageSize);
@@ -38,7 +38,7 @@ namespace AHNet.Web.Features.Blog
         [HttpGet("/Blog/{blogPostTitle}")]
         public IActionResult BlogPost(string blogPostTitle)
         {
-            var model = new BlogPostContentViewModel();
+            BlogPostContentViewModel model;
             try
             {
                 var blogPost = _blogPostRepository.GetByTitle(blogPostTitle);
@@ -49,6 +49,7 @@ namespace AHNet.Web.Features.Blog
                 }
 
                 model = _mapper.Map<BlogPostContentViewModel>(blogPost);
+                model.ContentTags = _blogPostRepository.GetContentTagsByBlogPostTitle(model.Title);
             }
             catch (BlogPostNotFoundException)
             {

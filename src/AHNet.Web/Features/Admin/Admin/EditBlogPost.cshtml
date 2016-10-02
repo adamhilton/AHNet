@@ -1,4 +1,7 @@
-﻿@model AHNet.Web.Features.Admin.Admin.ViewModels.EditBlogPostViewModel
+﻿@using System
+@using System.Linq
+@using System.Threading.Tasks
+@model AHNet.Web.Features.Admin.Admin.ViewModels.EditBlogPostViewModel
 
 @{
     ViewBag.Title = $"edit - {Model.Title}";
@@ -43,6 +46,18 @@
     </div>
 
     <div class="form-group">
+        <label asp-for="AvailableContentTags" class="col-md-offset-2 col-md-10 control-label"></label>
+        <div class="col-md-offset-2 col-md-10 control-label">
+            <span asp-validation-for="AvailableContentTags" class="text-danger"></span>
+            @foreach (var tag in Model.AvailableContentTags)
+            {
+                var tagIsSelected = Model.SelectedContentTags.Any(a => string.Equals(a, tag, StringComparison.CurrentCultureIgnoreCase));
+                <input type="checkbox" name="AvailableContentTags" checked="@tagIsSelected" value="@tag"> @tag
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
         <div class="col-md-offset-2 col-xs-2 control-label">
             <input type="submit" value="Save" class="btn btn-default" />
         </div>
@@ -55,16 +70,5 @@
 </form>
 
 @section Scripts{
-    <script type="text/javascript">
-        tinymce.init({
-            selector: '#Body',
-            width: 700,
-            height: 300,
-            plugins: [
-              'codesample'
-            ],
-            content_css: 'css/content.css',
-            toolbar: 'insertfile undo redo codesample | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons '
-        });
-    </script>
+  <script src="@Url.Content("~/js/tinymce-configuration.js")"></script>
 }

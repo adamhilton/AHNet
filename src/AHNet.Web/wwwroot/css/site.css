@@ -96,10 +96,14 @@ pre code {
     margin-bottom: 8px;
 }
 
-.blog-post-preview-info {
+.blog-post-preview-info, .blog-post-info {
     margin-top: 0;
     margin-bottom: 15px;
     color: #808080;
+}
+
+.blog-post-preview-info p, .blog-post-info p {
+    margin: 0;
 }
 
 p {
