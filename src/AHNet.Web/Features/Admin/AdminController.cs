@@ -150,6 +150,12 @@ namespace AHNet.Web.Features.Admin
             return RedirectToAction("BlogPosts");
         }
 
+        public IActionResult ValidateBlogPostTitle(string title)
+        {
+            return Json(!_blogPostRepository.BlogPostTitleAlreadyExists(title) ?
+                "true" : "This title is already taken");
+        }
+
         public IActionResult ContentTags(int? page)
         {
             const int pageSize = 25;
@@ -216,6 +222,12 @@ namespace AHNet.Web.Features.Admin
             _contentTagRepository.Delete(tag);
 
             return RedirectToAction("ContentTags");
+        }
+
+        public IActionResult ValidateContentTagName(string name)
+        {
+            return Json(!_contentTagRepository.ContentTagNameAlreadyExists(name) ?
+                "true" : "This name is already taken");
         }
     }
 }

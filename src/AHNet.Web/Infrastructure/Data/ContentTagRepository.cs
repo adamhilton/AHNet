@@ -32,5 +32,16 @@ namespace AHNet.Web.Infrastructure.Data
         {
             return _dbSet.FirstOrDefault(w => string.Equals(w.Name, tag, StringComparison.CurrentCultureIgnoreCase));
         }
+
+        internal bool ContentTagNameAlreadyExists(string name)
+        {
+            return _dbSet.Any(
+                w => string.Equals(
+                    w.Name,
+                    name,
+                    StringComparison.CurrentCultureIgnoreCase
+                )
+            );
+        }
     }
 }

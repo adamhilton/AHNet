@@ -104,5 +104,16 @@ namespace AHNet.Web.Infrastructure.Data
             }
             _dbContext.SaveChanges();
         }
+
+        public bool BlogPostTitleAlreadyExists(string title)
+        {
+            return _dbSet.Any(w => 
+                string.Equals(
+                    w.Title.RemoveSpecialCharacters(),
+                    title.RemoveSpecialCharacters(),
+                    StringComparison.CurrentCultureIgnoreCase
+                )
+            );
+        }
     }
 }
