@@ -133,3 +133,16 @@ p {
 .social-button-list-items {
     margin-top: 10px;
 }
+
+.pagination > li > a, .pagination > li > span {
+    color: #0085a1;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background-color: #0085a1;
+    border-color: #0085a1;
+}
+
+.recent-posts-header {
+    padding-bottom: 20px;
+}

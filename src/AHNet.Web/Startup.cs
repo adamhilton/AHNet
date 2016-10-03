@@ -61,7 +61,6 @@ namespace AHNet.Web
 
             services.AddRouting( options => {
                 options.LowercaseUrls = true;
-                options.AppendTrailingSlash = true;
             });
 
             services.AddSingleton(_ => Configuration);
