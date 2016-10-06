@@ -5,8 +5,8 @@
     <ul id="recent-posts-list">
         @foreach (var item in Model)
         {
-            <li class="recent-posts-item">
-                <a ahnet-blog-title="@item.UrlTitle">
+            <a ahnet-blog-title="@item.UrlTitle">
+                <li class="recent-posts-item">  
                     @item.Title
 
                     <div class="blog-post-preview-info">
@@ -14,9 +14,9 @@
                             @item.DatePublished.ToFormattedString()
                         </i>
                     </div>
-                </a>
-            </li>
-            <hr/>
+                </li>
+            </a>
+
         }
     </ul>
 }

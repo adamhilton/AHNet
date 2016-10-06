@@ -1,6 +1,6 @@
 ﻿<div class="row" id="side-bar">
 
-    <div class="col-xs-12 side-bar-section">
+    <div class="col-xs-12 bottom-border">
         <div class="col-xs-12">
             <img src="~/images/android-me.png" alt="android-me-picture" id="side-bar-avatar"/>
         </div>
@@ -42,12 +42,11 @@
         </div>
     </div>
 
-    <div class="col-xs-12 side-bar-section">
+    <div class="col-xs-12">
         <h4 class="text-center recent-posts-header">recent posts</h4>
         <div class="text-center">
             @await Component.InvokeAsync("RecentBlogPosts")
         </div>
-
     </div>
 
 </div>

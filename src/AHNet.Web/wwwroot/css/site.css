@@ -28,7 +28,7 @@ a:hover, a:visited, a:link, a:active {
     text-align: center;
     padding-top: 20px;
     margin-top: 20px;
-    border-top: #000000 solid 1px;
+    border-top: #9d9d9d solid 1px;
 }
 
 .body-content {
@@ -65,7 +65,7 @@ pre code {
     max-height: 100px;
 }
 
-.side-bar-section {
+.bottom-border {
     border-bottom: 1px solid #eceeef;
 }
 
@@ -76,7 +76,7 @@ pre code {
 }
 
 .recent-posts-item {
-    margin-top: 5px;
+    margin-bottom: 20px;
 }
 
 .blog-posts-list {
@@ -152,4 +152,5 @@ p {
 
 .recent-posts-header {
     padding-bottom: 20px;
+    padding-top: 20px;
 }
