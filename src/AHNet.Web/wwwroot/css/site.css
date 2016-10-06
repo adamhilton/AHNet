@@ -31,8 +31,8 @@ a:hover, a:visited, a:link, a:active {
     border-top: #000000 solid 1px;
 }
 
-.top-header {
-    margin-bottom: 70px;
+.body-content {
+    margin-top: 70px;
 }
 
 .navbar {
