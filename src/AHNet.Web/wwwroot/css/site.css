@@ -138,6 +138,13 @@ p {
     color: #0085a1;
 }
 
+.recent-posts-item:hover .blog-post-preview-info,
+ .recent-posts-item:active .blog-post-preview-info,
+ .recent-posts-item:hover a,
+ .recent-posts-item:active a {
+    color: #0085a1!important;
+}
+
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
     background-color: #0085a1;
     border-color: #0085a1;
