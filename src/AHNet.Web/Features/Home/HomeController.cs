@@ -1,4 +1,5 @@
-﻿using AHNet.Web.Infrastructure.Data;
+﻿using AHNet.Web.Features.Shared.ViewModels;
+using AHNet.Web.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AHNet.Web.Features.Home
@@ -12,12 +13,9 @@ namespace AHNet.Web.Features.Home
             _blogPostRepository = blogPostRepository;
         }
 
-        public IActionResult Index(int? page)
+        public IActionResult Index(BlogPostsRequestViewModel request)
         {
-            const int pageSize = 20;
-            var pageNumber = (page ?? 1);
-
-            var result = _blogPostRepository.ToPagedListOfPublishedBlogPosts(pageNumber, pageSize);
+            var result = _blogPostRepository.ToPagedListOfPublishedBlogPosts(request);
 
             var model = new HomeIndexViewModel()
             {

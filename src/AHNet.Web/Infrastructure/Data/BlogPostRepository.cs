@@ -66,9 +66,10 @@ namespace AHNet.Web.Infrastructure.Data
                 .ToPagedList(pageSize, pageNumber);
         }
 
-        public IPagedList<BlogPostWithContentTagsViewModel> ToPagedListOfPublishedBlogPosts(int pageNumber, int pageSize)
+        public IPagedList<BlogPostWithContentTagsViewModel> ToPagedListOfPublishedBlogPosts(BlogPostsRequestViewModel request)
         {
             return _dbSet
+                .FilterByTag(request.tag, _dbContext)
                 .Where(w => w.IsPublished)
                 .Include(i => i.BlogPostsContentTags)
                 .OrderByDescending(o => o.DatePublished)
@@ -81,7 +82,7 @@ namespace AHNet.Web.Infrastructure.Data
                         .Select(s => s.ContentTag)
                         .ToList()
                 })
-                .ToPagedList(pageSize, pageNumber);
+                .ToPagedList(request.pageSize, request.page);
         }
 
         public List<ContentTag> GetContentTagsByBlogPostTitle(string title)
