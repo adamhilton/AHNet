@@ -3,3 +3,4 @@
 
 # Linguist
 src/AHNet.Web/wwwroot/lib/* linguist-vendored=true
+*.js linguist-vendored=true
