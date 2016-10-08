@@ -2,4 +2,4 @@
 *.cs     diff=csharp
 
 # Linguist
-src/AHNet.Web/wwwroot/lib/* linguist-vendored
+src/AHNet.Web/wwwroot/lib/* linguist-vendored=true
