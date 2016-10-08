@@ -1,0 +1,15 @@
+﻿@model List<AHNet.Web.Core.Entities.ContentTag>
+
+@if (Model.Any())
+{
+    @foreach(var tag in Model)
+    {
+        <a asp-controller="blog" asp-action="index" asp-route-tag="@tag.Name">
+            <span class="label label-tag">@tag.Name</span>
+        </a>
+    }
+}
+else
+{
+    <h3 class="text-center">No tags have been created yet...</h3>
+}

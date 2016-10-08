@@ -17,9 +17,11 @@
             <div class="col-xs-12">
                 <div class="row blog-post-preview-item">
 
-                    <a ahnet-blog-title="@item.BlogPost.Title.RemoveSpecialCharacters()">
-                        <h3 class="blog-post-preview-title">@item.BlogPost.Title</h3>
-                    </a>
+                        <h3 class="blog-post-preview-title">
+                            <a ahnet-blog-title="@item.BlogPost.Title.RemoveSpecialCharacters()">
+                                @item.BlogPost.Title
+                            </a>
+                        </h3>
                     <div class="blog-post-preview-info">
                         <p>
                             <i class="fa fa-calendar"></i>

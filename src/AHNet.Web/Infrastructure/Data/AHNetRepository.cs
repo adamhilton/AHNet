@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AHNet.Web.Core.Entities;
 using AHNet.Web.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,11 @@ namespace AHNet.Web.Infrastructure.Data
         public List<T> List()
         {
             return _dbSet.ToList();
+        }
+
+        public async Task<List<T>> ListAsync()
+        {
+            return await _dbSet.ToListAsync();
         }
 
         public void Update(T entity)

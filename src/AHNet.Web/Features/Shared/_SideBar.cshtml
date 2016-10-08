@@ -42,8 +42,19 @@
         </div>
     </div>
 
+    <div class="col-xs-12 bottom-border">
+        <h4 class="text-center side-bar-section-header">
+            tags
+        </h4>
+        <div class="text-center">
+            @await Component.InvokeAsync("ContentTags")
+        </div>
+    </div>
+
     <div class="col-xs-12">
-        <h4 class="text-center recent-posts-header">recent posts</h4>
+        <h4 class="text-center side-bar-section-header">
+            recent posts
+        </h4>
         <div class="text-center">
             @await Component.InvokeAsync("RecentBlogPosts")
         </div>
