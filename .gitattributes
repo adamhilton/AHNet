@@ -2,5 +2,5 @@
 *.cs     diff=csharp
 
 # Linguist
-src/AHNet.Web/wwwroot/lib/* linguist-vendored=true
+*.cshtml linguist-language=Html
 *.js linguist-vendored=true
