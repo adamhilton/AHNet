@@ -1,5 +1,6 @@
 using AHNet.Web.Core.Exceptions;
 using AHNet.Web.Features.Blog.ViewModels;
+using AHNet.Web.Features.Shared.ViewModels;
 using AHNet.Web.Infrastructure.Data;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -20,12 +21,9 @@ namespace AHNet.Web.Features.Blog
         }
 
         [HttpGet]
-        public IActionResult Index(int? page)
+        public IActionResult Index(BlogPostsRequestViewModel request)
         {
-            const int pageSize = 20;
-            var pageNumber = (page ?? 1);
-
-            var blogPosts = _blogPostRepository.ToPagedListOfPublishedBlogPosts(pageNumber, pageSize);
+            var blogPosts = _blogPostRepository.ToPagedListOfPublishedBlogPosts(request);
 
             var model = new BlogIndexViewModel()
             {

@@ -30,7 +30,9 @@
                             <i class="fa fa-tag"></i>
                             @foreach (var tag in item.ContentTags)
                             {
-                                <span>@tag.Name </span>
+                                <a asp-controller="blog" asp-action="index" asp-route-tag="@tag.Name">
+                                    @tag.Name 
+                                </a>
                             }
                         </p>
                     }
