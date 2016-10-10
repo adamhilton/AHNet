@@ -1,45 +1,54 @@
 ﻿@model AHNet.Web.Features.Shared.ViewModels.BlogPostsRequestViewModel
 
-<div class="row" id="side-bar">
+<div id="side-bar">
 
-    <div class="col-xs-12 bottom-border">
-        <div class="col-xs-12">
-            <img src="~/images/android-me.png" alt="android-me-picture" id="side-bar-avatar"/>
-        </div>
-        <div class="col-xs-12">
-            <div class="text-center">
-                <strong>adam hilton</strong>
+    <div class="row">
+        <div class="col-xs-12 bottom-border">
+            <div class="col-xs-12">
+                <img src="~/images/android-me.png" alt="android-me-picture" id="side-bar-avatar"/>
             </div>
-            <div class="text-center">
-                <small>software developer</small>
+            <div class="col-xs-12">
+                <div class="text-center">
+                    <strong>adam hilton</strong>
+                </div>
+                <div class="text-center">
+                    <small>software developer</small>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                @Html.Partial("_SocialButtons.cshtml")
             </div>
         </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 bottom-border">
+
+            <div class="row" id="Side-Bar-Search-Bar">
+                <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12">
+                    <form asp-controller="blog" asp-action="index" method="get">
+                        <input asp-for="q" type="search" class="form-control" placeholder="Search for...">
+                    </form>
+                </div>
+            </div>
+
+            <div class="row" id="Side-Bar-Content-Tags">
+                <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12">
+                    @await Component.InvokeAsync("ContentTags")
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-xs-12">
-            @Html.Partial("_SocialButtons.cshtml")
+            <h4 class="text-center side-bar-section-header">
+                recent posts
+            </h4>
+            <div class="text-center">
+                @await Component.InvokeAsync("RecentBlogPosts")
+            </div>
         </div>
     </div>
-
-    <div class="col-xs-12 bottom-border">
-
-        <div id="Side-Bar-Search-Bar">
-            <form asp-controller="blog" asp-action="index" method="get">
-                <input asp-for="q" type="search" class="form-control" placeholder="Search for...">
-            </form>
-        </div>
-
-        <div class="text-center" id="Side-Bar-Content-Tags">
-            @await Component.InvokeAsync("ContentTags")
-        </div>
-
-    </div>
-
-    <div class="col-xs-12">
-        <h4 class="text-center side-bar-section-header">
-            recent posts
-        </h4>
-        <div class="text-center">
-            @await Component.InvokeAsync("RecentBlogPosts")
-        </div>
-    </div>
-
 </div>
