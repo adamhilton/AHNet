@@ -67,7 +67,6 @@ pre code {
 
 .bottom-border {
     border-bottom: 1px solid #eceeef;
-    padding-bottom: 20px;
 }
 
 #recent-posts-list {
@@ -162,6 +161,7 @@ p {
 .side-bar-section-header {
     padding-bottom: 20px;
     padding-top: 20px;
+    margin:0;
 }
 
 .label-tag {
@@ -170,4 +170,12 @@ p {
 
 .label-tag:active, .label-tag:hover {
     background-color: #0085a1; 
+}
+
+#Side-Bar-Search-Bar {
+    padding-top: 20px;
+}
+
+#Side-Bar-Content-Tags {
+    padding-bottom: 20px;
 }

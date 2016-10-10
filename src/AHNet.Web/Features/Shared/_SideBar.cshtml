@@ -43,10 +43,12 @@
     </div>
 
     <div class="col-xs-12 bottom-border">
-        <h4 class="text-center side-bar-section-header">
-            tags
-        </h4>
-        <div class="text-center">
+
+        <div id="Side-Bar-Search-Bar">
+            <input type="text" class="form-control" placeholder="Search for...">
+        </div>
+
+        <div class="text-center" id="Side-Bar-Content-Tags">
             @await Component.InvokeAsync("ContentTags")
         </div>
     </div>
