@@ -1,4 +1,6 @@
-﻿<div class="row" id="side-bar">
+﻿@model AHNet.Web.Features.Shared.ViewModels.BlogPostsRequestViewModel
+
+<div class="row" id="side-bar">
 
     <div class="col-xs-12 bottom-border">
         <div class="col-xs-12">
@@ -13,44 +15,22 @@
             </div>
         </div>
         <div class="col-xs-12">
-            <ul class="list-inline text-center social-button-list-items">
-                <li class="list-inline-item">
-                    <a href="https://twitter.com/felsig_" target="_blank">
-                        <span class="fa fa-stack">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="https://www.linkedin.com/in/adam-hilton-26848493" target="_blank">
-                        <span class="fa fa-stack">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="https://github.com/Felsig" target="_blank">
-                        <span class="fa fa-stack">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            </ul>
+            @Html.Partial("_SocialButtons.cshtml")
         </div>
     </div>
 
     <div class="col-xs-12 bottom-border">
 
         <div id="Side-Bar-Search-Bar">
-            <input type="text" class="form-control" placeholder="Search for...">
+            <form asp-controller="blog" asp-action="index" method="get">
+                <input asp-for="q" type="search" class="form-control" placeholder="Search for...">
+            </form>
         </div>
 
         <div class="text-center" id="Side-Bar-Content-Tags">
             @await Component.InvokeAsync("ContentTags")
         </div>
+
     </div>
 
     <div class="col-xs-12">
