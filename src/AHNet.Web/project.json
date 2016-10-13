@@ -41,16 +41,12 @@
     "Microsoft.AspNetCore.Mvc.Razor": "1.0.1",
     "Microsoft.AspNetCore.Mvc.Abstractions": "1.0.1",
     "Microsoft.Extensions.Configuration.CommandLine": "1.0.0",
-
     "Serilog.Extensions.Logging": "1.2.0",
     "Serilog.Sinks.ColoredConsole": "2.0.0",
-
     "Sakura.AspNetCore.PagedList": "2.0.1",
     "Sakura.AspNetCore.Mvc.PagedList": "2.0.9",
-
     "AutoMapper": "5.1.1"
   },
-
   "tools": {
     "BundlerMinifier.Core": "2.0.238",
     "Microsoft.AspNetCore.Razor.Tools": "1.0.0-preview2-final",
@@ -68,7 +64,6 @@
       "imports": "portable-net451+win8"
     }
   },
-
   "frameworks": {
     "netcoreapp1.0": {
       "imports": [
@@ -77,18 +72,15 @@
       ]
     }
   },
-
   "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true
   },
-
   "runtimeOptions": {
     "configProperties": {
       "System.GC.Server": true
     }
   },
-
   "publishOptions": {
     "include": [
       "wwwroot",
@@ -99,11 +91,14 @@
       "web.config"
     ]
   },
-
   "scripts": {
-    "prepublish": [ "bower install", "dotnet bundle" ],
-    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+    "prepublish": [
+      "bower install",
+      "dotnet bundle"
+    ],
+    "postpublish": [
+      "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%"
+    ]
   },
-
   "userSecretsId": "aspnet-AHNet.Web-20160911115156"
 }

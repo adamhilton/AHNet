@@ -24,8 +24,8 @@ namespace AHNet.Web
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
             if (env.IsDevelopment())
             {
@@ -51,7 +51,7 @@ namespace AHNet.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AHNetDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DataAccessPostgreSqlProvider")));
+                options.UseNpgsql(Configuration["AHNETDBCONNECTIONSTRING"]));
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<AHNetDbContext>()
@@ -59,7 +59,8 @@ namespace AHNet.Web
 
             services.AddMvcWithFeatureRouting();
 
-            services.AddRouting( options => {
+            services.AddRouting(options =>
+            {
                 options.LowercaseUrls = true;
             });
 
