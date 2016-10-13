@@ -68,10 +68,16 @@ namespace AHNet.Web.Infrastructure.Data
 
         public IPagedList<BlogPostWithContentTagsViewModel> ToPagedListOfPublishedBlogPosts(BlogPostsRequestViewModel request)
         {
-            return _dbSet
+            var results = _dbSet
                 .FilterByTag(request.tag, _dbContext)
-                .Where(w => w.IsPublished)
-                .Include(i => i.BlogPostsContentTags)
+                .Where(w => w.IsPublished);
+                
+            if(!string.IsNullOrEmpty(request.q))
+            {
+                results = results.Where(w => w.Title.Contains(request.q) || w.Body.Contains(request.q));
+            }
+                
+            return results.Include(i => i.BlogPostsContentTags)
                 .OrderByDescending(o => o.DatePublished)
                 .Select(post => new BlogPostWithContentTagsViewModel()
                 {

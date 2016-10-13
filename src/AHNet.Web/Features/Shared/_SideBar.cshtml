@@ -1,63 +1,54 @@
-﻿<div class="row" id="side-bar">
+﻿@model AHNet.Web.Features.Shared.ViewModels.BlogPostsRequestViewModel
 
-    <div class="col-xs-12 bottom-border">
-        <div class="col-xs-12">
-            <img src="~/images/android-me.png" alt="android-me-picture" id="side-bar-avatar"/>
-        </div>
-        <div class="col-xs-12">
-            <div class="text-center">
-                <strong>adam hilton</strong>
+<div id="side-bar">
+
+    <div class="row">
+        <div class="col-xs-12 bottom-border">
+            <div class="col-xs-12">
+                <img src="~/images/android-me.png" alt="android-me-picture" id="side-bar-avatar"/>
             </div>
-            <div class="text-center">
-                <small>software developer</small>
+            <div class="col-xs-12">
+                <div class="text-center">
+                    <strong>adam hilton</strong>
+                </div>
+                <div class="text-center">
+                    <small>software developer</small>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                @Html.Partial("_SocialButtons.cshtml")
             </div>
         </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 bottom-border">
+
+            <div class="row" id="Side-Bar-Search-Bar">
+                <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12">
+                    <form asp-controller="blog" asp-action="index" method="get">
+                        <input asp-for="q" type="search" class="form-control" placeholder="Search for...">
+                    </form>
+                </div>
+            </div>
+
+            <div class="row" id="Side-Bar-Content-Tags">
+                <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12">
+                    @await Component.InvokeAsync("ContentTags")
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-xs-12">
-            <ul class="list-inline text-center social-button-list-items">
-                <li class="list-inline-item">
-                    <a href="https://twitter.com/felsig_" target="_blank">
-                        <span class="fa fa-stack">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="https://www.linkedin.com/in/adam-hilton-26848493" target="_blank">
-                        <span class="fa fa-stack">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="https://github.com/Felsig" target="_blank">
-                        <span class="fa fa-stack">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            </ul>
+            <h4 class="text-center side-bar-section-header">
+                recent posts
+            </h4>
+            <div class="text-center">
+                @await Component.InvokeAsync("RecentBlogPosts")
+            </div>
         </div>
     </div>
-
-    <div class="col-xs-12 bottom-border">
-        <h4 class="text-center side-bar-section-header">
-            tags
-        </h4>
-        <div class="text-center">
-            @await Component.InvokeAsync("ContentTags")
-        </div>
-    </div>
-
-    <div class="col-xs-12">
-        <h4 class="text-center side-bar-section-header">
-            recent posts
-        </h4>
-        <div class="text-center">
-            @await Component.InvokeAsync("RecentBlogPosts")
-        </div>
-    </div>
-
 </div>
