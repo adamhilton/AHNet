@@ -156,10 +156,14 @@ namespace AHNet.Web
             switch (configuration["AHNET_DATABASETYPE"].ToLower() ?? string.Empty)
             {
                 case "postgres":
+                case "postgresql":
+                case "pgsql":
                     services.AddDbContext<AHNetDbContext>(options =>
-                        options.UseNpgsql(configuration["AHNETDBCONNECTIONSTRING"]));
+                        options.UseNpgsql(configuration["AHNET_DBCONNECTIONSTRING"]));
                     break;
                 case "inmemory":
+                case "inmem":
+                case "in-memory":
                     services.AddDbContext<AHNetDbContext>(options =>
                         options.UseInMemoryDatabase());
                     break;
