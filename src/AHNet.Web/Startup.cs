@@ -13,6 +13,7 @@ using AHNet.Web.Core;
 using AHNet.Web.Core.AutoMapper;
 using AutoMapper;
 using Sakura.AspNetCore.Mvc;
+using AHNet.Web.Infrastructure.Utilities;
 
 namespace AHNet.Web
 {
@@ -158,8 +159,17 @@ namespace AHNet.Web
                 case "postgres":
                 case "postgresql":
                 case "pgsql":
+                    var connectionString = new PostgreSqlConnectionString()
+                    {
+                        DatabaseHost = configuration["AHNET_DBHOST"],
+                        DatabaseName = configuration["AHNET_DBNAME"],
+                        DatabaseOwner = configuration["AHNET_DBOWNER"],
+                        DatabasePassword = configuration["AHNET_DBPASSWORD"],
+                        DatabasePort = configuration["AHNET_DBPORT"],
+                        DatabasePooling = configuration["AHNET_DBPOOLING"]
+                    }.GetConnectionString();
                     services.AddDbContext<AHNetDbContext>(options =>
-                        options.UseNpgsql(configuration["AHNET_DBCONNECTIONSTRING"]));
+                        options.UseNpgsql(connectionString));
                     break;
                 case "inmemory":
                 case "inmem":
