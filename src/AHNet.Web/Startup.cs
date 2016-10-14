@@ -50,8 +50,7 @@ namespace AHNet.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AHNetDbContext>(options =>
-                options.UseNpgsql(Configuration["AHNETDBCONNECTIONSTRING"]));
+            services.AddDatabase(Configuration);
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<AHNetDbContext>()
@@ -150,6 +149,23 @@ namespace AHNet.Web
                     options.ViewLocationFormats.Add("/Features/Shared/{0}.cshtml");
                     options.ViewLocationExpanders.Add(new FeatureViewLocationExpander());
                 });
+        }
+
+        public static void AddDatabase(this IServiceCollection services, IConfigurationRoot configuration)
+        {
+            switch (configuration["AHNET_DATABASETYPE"].ToLower() ?? string.Empty)
+            {
+                case "postgres":
+                    services.AddDbContext<AHNetDbContext>(options =>
+                        options.UseNpgsql(configuration["AHNETDBCONNECTIONSTRING"]));
+                    break;
+                case "inmemory":
+                    services.AddDbContext<AHNetDbContext>(options =>
+                        options.UseInMemoryDatabase());
+                    break;
+                default:
+                    return;
+            }
         }
     }
 }
