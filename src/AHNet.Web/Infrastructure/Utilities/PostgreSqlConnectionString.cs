@@ -3,12 +3,12 @@ namespace AHNet.Web.Infrastructure.Utilities
 {
     public class PostgreSqlConnectionString
     {
-        public string DatabaseHost { get; set; } = "localhost";
-        public string DatabaseName { get; set; } = "ahnet";
-        public string DatabaseOwner { get; set; } = "ahnet";
-        public string DatabasePassword { get; set; } = string.Empty;
-        public string DatabasePort { get; set; } = "5432";
-        public string DatabasePooling { get; set; } = "true";
+        public string DatabaseHost { get; set; }
+        public string DatabaseName { get; set; } 
+        public string DatabaseOwner { get; set; }
+        public string DatabasePassword { get; set; }
+        public string DatabasePort { get; set; } 
+        public string DatabasePooling { get; set; }
 
         public override string ToString()
         {

@@ -6,15 +6,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AHNet.Web.Infrastructure.Data;
-using AHNet.Web.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using AHNet.Web.Core;
 using AHNet.Web.Core.AutoMapper;
 using AutoMapper;
 using Sakura.AspNetCore.Mvc;
-using AHNet.Web.Infrastructure.Utilities;
 using System;
+using AHNet.Web.Infrastructure.Utilities;
+using AHNet.Web.Core.Entities;
 
 namespace AHNet.Web
 {
@@ -177,7 +177,7 @@ namespace AHNet.Web
                         DatabasePort = configuration.GetValue<string>("AHNET_DBPORT") ?? string.Empty,
                         DatabasePooling = configuration.GetValue<string>("AHNET_DBPOOLING") ?? string.Empty
                     }.ToString();
-                    services.AddDbContext<AHNetDbContext>(options =>
+                    services.AddDbContext<AHNetDbContext>(options => 
                         options.UseNpgsql(connectionString));
                     break;
                 case "inmemory":

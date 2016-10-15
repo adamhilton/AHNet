@@ -6,9 +6,15 @@ namespace AHNet.Web.Infrastructure.Data
 {
     public class AHNetDbContext : IdentityDbContext<User>
     {
+        public AHNetDbContext() {}
         public AHNetDbContext(DbContextOptions<AHNetDbContext> options)
             : base(options)
         {
+        }
+
+        protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder )
+        {
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
