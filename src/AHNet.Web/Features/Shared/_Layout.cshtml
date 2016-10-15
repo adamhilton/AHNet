@@ -1,64 +1,64 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - adamhilton.net</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - adamhilton.net</title>
 
-    <environment names="Development">
-        <link rel="stylesheet" href="~/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/clean-blog.css"/>
-        <link rel="stylesheet" href="~/css/font-awesome.css"/>
-        <link rel="stylesheet" href="~/css/prism.css"/>
-        <link rel="stylesheet" href="~/css/site.css" />
+	<environment names="Development">
+		<link rel="stylesheet" href="~/css/bootstrap.css" />
+		<link rel="stylesheet" href="~/css/clean-blog.css" />
+		<link rel="stylesheet" href="~/css/font-awesome.css" />
+		<link rel="stylesheet" href="~/css/prism.css" />
+		<link rel="stylesheet" href="~/css/site.css" />
 
-    </environment>
-    <environment names="Staging,Production">
-        <link rel="stylesheet" href="~/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/css/clean-blog.min.css" />
-        <link rel="stylesheet" href="~/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="~/css/prism.min.css" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+	</environment>
+	<environment names="Staging,Production">
+		<link rel="stylesheet" href="~/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="~/css/clean-blog.min.css" />
+		<link rel="stylesheet" href="~/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="~/css/prism.min.css" />
+		<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+	</environment>
 </head>
-<body>
 
-    @Html.Partial("_NavBar")
+<body class="container-fluid">
 
-    <div class="container body-content">
-        <div class="row">
-            
-            <div class="row">
-                <div class="col-xs-12 col-md-9 col-lg-9">
-                    @RenderBody()
-                </div>
-                
-                <div class="col-xs-12 col-md-3 col-lg-3">
-                    @Html.Partial("_SideBar", new BlogPostsRequestViewModel())
-                </div>
-            </div>
+	@Html.Partial("_NavBar")
 
-            <div class="row">
-                <div class="col-xs-12">
-                    @Html.Partial("_BottomBar")
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="body-content">
+		<div class="row">
+			<div class="col-xs-12 col-md-9 col-lg-9">
+				@RenderBody()
+			</div>
 
-    <environment names="Development">
-        <script src="~/js/jquery.js"></script>
-        <script src="~/js/bootstrap.js"></script>
-        <script src="~/js/prism.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment names="Staging,Production">
-        <script src="~/js/jquery.min.js"></script>
-        <script src="~/js/bootstrap.min.js"></script>
-        <script src="~/js/prism.min.js"></script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+			<div class="col-xs-12 col-md-3 col-lg-3">
+				@Html.Partial("_SideBar", new BlogPostsRequestViewModel())
+			</div>
+		</div>
 
-    @RenderSection("scripts", required: false)
+		<div class="row">
+			<div class="col-xs-12">
+				@Html.Partial("_BottomBar")
+			</div>
+		</div>
+	</div>
+
+	<environment names="Development">
+		<script src="~/js/jquery.js"></script>
+		<script src="~/js/bootstrap.js"></script>
+		<script src="~/js/prism.js"></script>
+		<script src="~/js/site.js" asp-append-version="true"></script>
+	</environment>
+	<environment names="Staging,Production">
+		<script src="~/js/jquery.min.js"></script>
+		<script src="~/js/bootstrap.min.js"></script>
+		<script src="~/js/prism.min.js"></script>
+		<script src="~/js/site.min.js" asp-append-version="true"></script>
+	</environment>
+
+	@RenderSection("scripts", required: false)
 </body>
+
 </html>
