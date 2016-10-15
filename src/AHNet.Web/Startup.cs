@@ -14,6 +14,7 @@ using AHNet.Web.Core.AutoMapper;
 using AutoMapper;
 using Sakura.AspNetCore.Mvc;
 using AHNet.Web.Infrastructure.Utilities;
+using System;
 
 namespace AHNet.Web
 {
@@ -25,8 +26,8 @@ namespace AHNet.Web
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+            .AddJsonFile("conf/appsettings.json", optional: true, reloadOnChange: true)
+            .AddJsonFile($"conf/appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
             if (env.IsDevelopment())
             {
@@ -114,7 +115,15 @@ namespace AHNet.Web
 
             app.UseMvc(ConfigureRoutes);
 
-            await seedData.InitializeAsync();
+            if (env.IsDevelopment())
+            {
+                await seedData.DevelopInitializeAsync();
+            }
+            else
+            {
+                await seedData.InitializeAsync();
+            }
+
         }
 
         private static CookieAuthenticationOptions GetCookieAuthenticationConfiguration()
@@ -154,20 +163,20 @@ namespace AHNet.Web
 
         public static void AddDatabase(this IServiceCollection services, IConfigurationRoot configuration)
         {
-            switch (configuration["AHNET_DATABASETYPE"].ToLower() ?? string.Empty)
+            switch (configuration.GetValue<string>("AHNET_DBTYPE").ToLower())
             {
                 case "postgres":
                 case "postgresql":
                 case "pgsql":
                     var connectionString = new PostgreSqlConnectionString()
                     {
-                        DatabaseHost = configuration["AHNET_DBHOST"],
-                        DatabaseName = configuration["AHNET_DBNAME"],
-                        DatabaseOwner = configuration["AHNET_DBOWNER"],
-                        DatabasePassword = configuration["AHNET_DBPASSWORD"],
-                        DatabasePort = configuration["AHNET_DBPORT"],
-                        DatabasePooling = configuration["AHNET_DBPOOLING"]
-                    }.GetConnectionString();
+                        DatabaseHost = configuration.GetValue<string>("AHNET_DBHOST") ?? string.Empty,
+                        DatabaseName = configuration.GetValue<string>("AHNET_DBNAME") ?? string.Empty,
+                        DatabaseOwner = configuration.GetValue<string>("AHNET_DBOWNER") ?? string.Empty,
+                        DatabasePassword = configuration.GetValue<string>("AHNET_DBPASSWORD") ?? string.Empty,
+                        DatabasePort = configuration.GetValue<string>("AHNET_DBPORT") ?? string.Empty,
+                        DatabasePooling = configuration.GetValue<string>("AHNET_DBPOOLING") ?? string.Empty
+                    }.ToString();
                     services.AddDbContext<AHNetDbContext>(options =>
                         options.UseNpgsql(connectionString));
                     break;
@@ -178,7 +187,7 @@ namespace AHNet.Web
                         options.UseInMemoryDatabase());
                     break;
                 default:
-                    return;
+                    throw new Exception("No database specified.");
             }
         }
     }

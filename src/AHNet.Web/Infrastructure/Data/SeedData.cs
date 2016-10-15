@@ -28,6 +28,11 @@ namespace AHNet.Web.Infrastructure.Data
             {
                 await CreateAdminAsync();
             }
+        }
+
+        public async Task DevelopInitializeAsync()
+        {
+            await InitializeAsync();
 
             if (NoPostsExist())
             {
@@ -70,8 +75,13 @@ namespace AHNet.Web.Infrastructure.Data
 
         private async Task CreateAdminAsync()
         {
-            var userName = _configuration["AHNET_ADMINUSER"];
-            var password = _configuration["AHNET_ADMINPASS"];
+            var userName = _configuration.GetValue<string>("AHNET_ADMINUSER") ?? string.Empty;
+            var password = _configuration.GetValue<string>("AHNET_ADMINPASS") ?? string.Empty;
+
+            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
+            {
+                throw new Exception("Seed admin username or password is not set. Please set in enivronment or configuration file.");
+            }
 
             await CreateUserAsync(userName, password);
         }
