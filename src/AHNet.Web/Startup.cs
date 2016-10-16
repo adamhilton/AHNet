@@ -6,13 +6,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AHNet.Web.Infrastructure.Data;
-using AHNet.Web.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using AHNet.Web.Core;
 using AHNet.Web.Core.AutoMapper;
 using AutoMapper;
 using Sakura.AspNetCore.Mvc;
+using System;
+using AHNet.Web.Infrastructure.Utilities;
+using AHNet.Web.Core.Entities;
 
 namespace AHNet.Web
 {
@@ -24,8 +26,8 @@ namespace AHNet.Web
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+            .AddJsonFile("conf/appsettings.json", optional: true, reloadOnChange: true)
+            .AddJsonFile($"conf/appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
             if (env.IsDevelopment())
             {
@@ -50,8 +52,7 @@ namespace AHNet.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AHNetDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DataAccessPostgreSqlProvider")));
+            services.AddDatabase(Configuration);
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<AHNetDbContext>()
@@ -59,7 +60,8 @@ namespace AHNet.Web
 
             services.AddMvcWithFeatureRouting();
 
-            services.AddRouting( options => {
+            services.AddRouting(options =>
+            {
                 options.LowercaseUrls = true;
             });
 
@@ -113,7 +115,15 @@ namespace AHNet.Web
 
             app.UseMvc(ConfigureRoutes);
 
-            await seedData.InitializeAsync();
+            if (env.IsDevelopment())
+            {
+                await seedData.DevelopInitializeAsync();
+            }
+            else
+            {
+                await seedData.InitializeAsync();
+            }
+
         }
 
         private static CookieAuthenticationOptions GetCookieAuthenticationConfiguration()
@@ -149,6 +159,36 @@ namespace AHNet.Web
                     options.ViewLocationFormats.Add("/Features/Shared/{0}.cshtml");
                     options.ViewLocationExpanders.Add(new FeatureViewLocationExpander());
                 });
+        }
+
+        public static void AddDatabase(this IServiceCollection services, IConfigurationRoot configuration)
+        {
+            switch (configuration.GetValue<string>("AHNET_DBTYPE").ToLower())
+            {
+                case "postgres":
+                case "postgresql":
+                case "pgsql":
+                    var connectionString = new PostgreSqlConnectionString()
+                    {
+                        DatabaseHost = configuration.GetValue<string>("AHNET_DBHOST") ?? string.Empty,
+                        DatabaseName = configuration.GetValue<string>("AHNET_DBNAME") ?? string.Empty,
+                        DatabaseOwner = configuration.GetValue<string>("AHNET_DBOWNER") ?? string.Empty,
+                        DatabasePassword = configuration.GetValue<string>("AHNET_DBPASSWORD") ?? string.Empty,
+                        DatabasePort = configuration.GetValue<string>("AHNET_DBPORT") ?? string.Empty,
+                        DatabasePooling = configuration.GetValue<string>("AHNET_DBPOOLING") ?? string.Empty
+                    }.ToString();
+                    services.AddDbContext<AHNetDbContext>(options => 
+                        options.UseNpgsql(connectionString));
+                    break;
+                case "inmemory":
+                case "inmem":
+                case "in-memory":
+                    services.AddDbContext<AHNetDbContext>(options =>
+                        options.UseInMemoryDatabase());
+                    break;
+                default:
+                    throw new Exception("No database specified.");
+            }
         }
     }
 }
