@@ -181,3 +181,31 @@ p {
 #Side-Bar-Content-Tags {
     padding-bottom: 20px;
 }
+
+.no-padding {
+    padding:0;
+}
+
+@media only screen and (min-width : 480px) {
+    #Blog-Post-Content {
+        padding: 0px 0px 0px 0px;
+    }
+}
+
+@media only screen and (min-width : 768px) {
+    #Blog-Post-Content {
+        padding: 0px 30px 0px 30px;
+    }
+}
+
+@media only screen and (min-width : 992px) {
+    #Blog-Post-Content {
+        padding: 0px 30px 0px 30px;
+    }
+}
+
+@media only screen and (min-width : 1200px) {
+    #Blog-Post-Content {
+        padding: 0px 30px 0px 30px;
+    }
+}
