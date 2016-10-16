@@ -43,10 +43,10 @@ namespace AHNet.Web.Infrastructure.Data
         private void CreateBlogPosts()
         {
             var sampleText = string.Empty;
-            for (var j = 0; j < 5; j++)
+            for (var j = 0; j < 2; j++)
             {
                 sampleText +=
-                    $"<p>Cold-pressed pok pok salvia, enamel pin next level vape trust fund. Pabst williamsburg live-edge brunch selfies, 3 wolf moon tofu synth. Tumblr VHS messenger bag, flannel intelligentsia try-hard cornhole forage four loko succulents whatever. Humblebrag seitan godard semiotics, four loko heirloom asymmetrical. Paleo woke lo-fi neutra. Yuccie mumblecore polaroid banh mi gentrify subway tile, small batch truffaut listicle cronut roof party wolf pabst mlkshk tumblr. Jean shorts etsy paleo tacos slow-carb, blue bottle try-hard whatever coloring book man bun. Selvage selfies subway tile tacos narwhal try-hard hoodie, bitters fam enamel pin forage lyft activated charcoal tofu. Subway tile +1 waistcoat, listicle cronut narwhal gochujang sriracha schlitz knausgaard austin cornhole.</p> {getSampleCode()} <p>Hammock green juice copper mug yr. Chia tbh fingerstache skateboard meggings tumeric. Affogato butcher succulents, art party synth retro waistcoat literally kogi twee</p>";
+                    $"<p>Cold-pressed pok pok salvia, enamel pin next level vape trust fund. Pabst williamsburg live-edge brunch selfies, 3 wolf moon tofu synth.</p> {getSampleCode()} <p>Hammock green juice copper mug yr. Chia tbh fingerstache skateboard meggings tumeric. Affogato butcher succulents, art party synth retro waistcoat literally kogi twee</p>";
             }
 
             for (var i = 0; i < 40; i++)
