@@ -1,4 +1,9 @@
 ﻿{
+  "version": "1.0.0",
+  "authors": [
+    "Adam Hilton"
+  ],
+  "description": "an ASP.NET Core website",
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.1",
