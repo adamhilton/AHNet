@@ -5,4 +5,4 @@ ENV ASPNETCORE_URLS http://+:80
 ENV ASPNETCORE_ENVIRONMENT Production
 EXPOSE 80/tcp
 RUN ["dotnet", "restore"]
-ENTRYPOINT ["sh", "run.sh"]
+ENTRYPOINT ["dotnet", "run"]

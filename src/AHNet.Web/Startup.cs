@@ -29,12 +29,13 @@ namespace AHNet.Web
             .AddJsonFile("conf/appsettings.json", optional: true, reloadOnChange: true)
             .AddJsonFile($"conf/appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
+            builder.AddEnvironmentVariables();
+
             if (env.IsDevelopment())
             {
                 builder.AddUserSecrets();
             }
 
-            builder.AddEnvironmentVariables();
             Configuration = builder.Build();
 
             InitializeMapperConfiguration();
