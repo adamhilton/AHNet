@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using System.Linq;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace AHNet.Web.Infrastructure.Data
 {
@@ -24,6 +25,7 @@ namespace AHNet.Web.Infrastructure.Data
 
         public async Task InitializeAsync()
         {
+            _ctx.Database.Migrate();
             if (NoUsersExist())
             {
                 await CreateAdminAsync();
