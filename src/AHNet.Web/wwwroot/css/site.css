@@ -217,11 +217,11 @@ p {
 
 @font-face {
   font-family: "fontcustom";
-  src: url("./fontcustom-docker/fontcustom_cb066050d5b786186aa0e7f121427d8b.eot");
-  src: url("./fontcustom-docker/fontcustom_cb066050d5b786186aa0e7f121427d8b.eot?#iefix") format("embedded-opentype"),
-       url("./fontcustom-docker/fontcustom_cb066050d5b786186aa0e7f121427d8b.woff") format("woff"),
-       url("./fontcustom-docker/fontcustom_cb066050d5b786186aa0e7f121427d8b.ttf") format("truetype"),
-       url("./fontcustom-docker/fontcustom_cb066050d5b786186aa0e7f121427d8b.svg#fontcustom") format("svg");
+  src: url("/css/fontcustom-docker/fontcustom_cb066050d5b786186aa0e7f121427d8b.eot");
+  src: url("/css/fontcustom-docker/fontcustom_cb066050d5b786186aa0e7f121427d8b.eot?#iefix") format("embedded-opentype"),
+       url("/css/fontcustom-docker/fontcustom_cb066050d5b786186aa0e7f121427d8b.woff") format("woff"),
+       url("/css/fontcustom-docker/fontcustom_cb066050d5b786186aa0e7f121427d8b.ttf") format("truetype"),
+       url("/css/fontcustom-docker/fontcustom_cb066050d5b786186aa0e7f121427d8b.svg#fontcustom") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -229,7 +229,7 @@ p {
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: "fontcustom";
-    src: url("./fontcustom-docker/fontcustom_cb066050d5b786186aa0e7f121427d8b.svg#fontcustom") format("svg");
+    src: url("/css/fontcustom-docker/fontcustom_cb066050d5b786186aa0e7f121427d8b.svg#fontcustom") format("svg");
   }
 }
 
