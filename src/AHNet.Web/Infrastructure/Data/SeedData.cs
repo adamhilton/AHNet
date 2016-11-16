@@ -25,7 +25,15 @@ namespace AHNet.Web.Infrastructure.Data
 
         public async Task InitializeAsync()
         {
-            _ctx.Database.Migrate();
+            try 
+            {
+                _ctx.Database.Migrate();
+            } 
+            catch
+            {   
+                //TODO: Log 
+            }
+
             if (NoUsersExist())
             {
                 await CreateAdminAsync();
