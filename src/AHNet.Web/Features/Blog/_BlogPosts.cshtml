@@ -30,7 +30,6 @@
                         @if (item.ContentTags.Count > 0)
                         {
                             <p>
-
                                 <i class="fa fa-tag"></i>
                                 @foreach (var tag in item.ContentTags)
                                 {
@@ -41,7 +40,9 @@
                             </p>
                         }
                     </div>
-                    @Html.Raw(item.BlogPost.GetBlogPostSummary())
+                    <div class="blog-post-preview-content">
+                        @Html.Raw(item.BlogPost.GetBlogPostSummary())
+                    </div>
                 </div>
             </div>
         </div>
