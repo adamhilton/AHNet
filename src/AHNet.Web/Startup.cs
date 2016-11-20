@@ -15,6 +15,7 @@ using Sakura.AspNetCore.Mvc;
 using System;
 using AHNet.Web.Infrastructure.Utilities;
 using AHNet.Web.Core.Entities;
+using Serilog;
 
 namespace AHNet.Web
 {
@@ -37,6 +38,11 @@ namespace AHNet.Web
             }
 
             Configuration = builder.Build();
+
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.ColoredConsole()
+                .CreateLogger();
 
             InitializeMapperConfiguration();
         }
@@ -91,7 +97,9 @@ namespace AHNet.Web
                         ILoggerFactory loggerFactory,
                         SeedData seedData)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory
+                .AddConsole(Configuration.GetSection("Logging"))
+                .AddSerilog();
 
             if (env.IsDevelopment())
             {

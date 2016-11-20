@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace AHNet.Web.Infrastructure.Data
 {
@@ -13,14 +14,17 @@ namespace AHNet.Web.Infrastructure.Data
         private readonly AHNetDbContext _ctx;
         private readonly UserManager<User> _userManager;
         private readonly IConfigurationRoot _configuration;
+        private readonly ILogger<SeedData> _logger;
 
         public SeedData(AHNetDbContext ctx,
             UserManager<User> userManager,
-            IConfigurationRoot configuration)
+            IConfigurationRoot configuration,
+            ILogger<SeedData> logger)
         {
             _ctx = ctx;
             _userManager = userManager;
             _configuration = configuration;
+            _logger = logger;
         }
 
         public async Task InitializeAsync()
@@ -29,9 +33,9 @@ namespace AHNet.Web.Infrastructure.Data
             {
                 _ctx.Database.Migrate();
             } 
-            catch
+            catch(Exception e)
             {   
-                //TODO: Log 
+                _logger.LogError(e.Message);
             }
 
             if (NoUsersExist())
