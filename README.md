@@ -3,6 +3,9 @@
 [![Build status](https://img.shields.io/appveyor/ci/felsig/ahnet/master.svg?style=flat-square)](https://ci.appveyor.com/project/Felsig/ahnet/branch/master)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 
+## DEPRECATED!
+Due to deep coupling with adamhilton.net branding in the project and trademark issues surrounding the domain,
+I've decided to move development of this project to [a new repository](https://github.com/Felsig/CactiCMS) to rebrand and restructure the project. 
 
 ## quick start
 
